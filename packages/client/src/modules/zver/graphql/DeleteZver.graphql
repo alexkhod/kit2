@@ -1,0 +1,5 @@
+mutation deleteZver($id: Int!) {
+  deleteZver(id: $id) {
+    id
+  }
+}

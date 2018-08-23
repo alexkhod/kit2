@@ -1,0 +1,10 @@
+#import "./Block.graphql"
+
+subscription onBlocksUpdated($endCursor: Int!) {
+  blocksUpdated(endCursor: $endCursor) {
+    mutation
+    node {
+      ...BlockInfo
+    }
+  }
+}

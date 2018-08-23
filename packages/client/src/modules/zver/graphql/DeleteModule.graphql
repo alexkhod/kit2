@@ -1,0 +1,5 @@
+mutation deleteModule($input: DeleteModuleInput!) {
+  deleteModule(input: $input) {
+    id
+  }
+}

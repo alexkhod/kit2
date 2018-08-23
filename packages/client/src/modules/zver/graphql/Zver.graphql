@@ -1,0 +1,5 @@
+fragment ZverInfo on Zver {
+  id
+  inv
+  isWork
+}

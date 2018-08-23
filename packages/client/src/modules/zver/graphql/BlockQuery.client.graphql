@@ -1,0 +1,6 @@
+#import "./Block.graphql"
+query blockState {
+  block @client {
+    ...BlockInfo
+  }
+}

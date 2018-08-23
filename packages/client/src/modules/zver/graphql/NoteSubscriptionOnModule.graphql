@@ -1,0 +1,12 @@
+#import "./Note.graphql"
+
+subscription onNoteUpdatedOnModule($moduleId: Int!) {
+  noteUpdatedOnModule(moduleId: $moduleId) {
+    mutation
+    id
+    moduleId
+    node {
+      ...NoteInfo
+    }
+  }
+}

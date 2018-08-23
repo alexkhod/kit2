@@ -1,0 +1,5 @@
+fragment ModuleInfo on Module {
+  id
+  inv
+  isWork
+}

@@ -1,0 +1,11 @@
+#import "./Note.graphql"
+#import "./Module.graphql"
+
+query module($id: Int!) {
+  module(id: $id) {
+    ...ModuleInfo
+    notes {
+      ...NoteInfo
+    }
+  }
+}

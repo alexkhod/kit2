@@ -1,0 +1,7 @@
+#import "./Zver.graphql"
+
+mutation editZver($input: EditZverInput!) {
+  editZver(input: $input) {
+    ...ZverInfo
+  }
+}

@@ -1,0 +1,6 @@
+fragment NoteInfo on Note {
+  id
+  content
+  updated_at
+  user_id
+}

@@ -3,6 +3,6 @@ export default {
     trackingId: 'UA-000000-01'
   },
   apolloEngine: {
-    key: 'service:sysgears-Apollo-Universal-Starter-Kit:mZvnMtAgDE93vAtk8Cj-1Q' // Set your Apollo Engine key here
+    key: 'service:alexkhod-7692:qMv9AMPuWGHvrLT7VKMG7A' // Set your Apollo Engine key here
   }
 };

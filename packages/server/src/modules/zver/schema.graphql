@@ -1,0 +1,281 @@
+# Zver
+type Zver {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+  created_at: String
+  updated_at: String
+  blocks: [Block]
+  notes: [Note]
+}
+
+# Block
+type Block {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+  created_at: String
+  updated_at: String
+  modules: [Module]
+  notes: [Note]
+}
+
+# Module
+type Module {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+  created_at: String
+  updated_at: String
+  notes: [Note]
+}
+
+# Note
+type Note {
+  id: Int!
+  content: String!
+  created_at: String
+  updated_at: String
+  user_id: String
+}
+
+# Edges for Zvers
+type ZverEdges {
+  node: Zver
+  cursor: Int
+}
+
+# PageInfo for Zvers
+type ZverPageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+
+# Zvers relay-style pagination query
+type Zvers {
+  totalCount: Int
+  edges: [ZverEdges]
+  pageInfo: ZverPageInfo
+}
+
+extend type Query {
+  # Zvers pagination query
+  zvers(limit: Int, after: Int): Zvers
+  # Zver
+  zver(id: Int!): Zver
+  # Block
+  block(id: Int!): Block
+  # Module
+  module(id: Int!): Module
+  # Note
+  note(id: Int!): Note
+}
+
+extend type Mutation {
+  # Create new zver
+  addZver(input: AddZverInput!): Zver
+  # Delete a zver
+  deleteZver(id: Int!): Zver
+  # Edit a zver
+  editZver(input: EditZverInput!): Zver
+  # Add block to zver
+  addBlock(input: AddBlockInput!): Block
+  # Delete a block
+  deleteBlock(input: DeleteBlockInput!): Block
+  # Edit a block
+  editBlock(input: EditBlockInput!): Block
+  # Add module to block
+  addModule(input: AddModuleInput!): Module
+  # Delete a module
+  deleteModule(input: DeleteModuleInput!): Module
+  # Edit a module
+  editModule(input: EditModuleInput!): Module
+  # Add note to zver
+  addNoteOnZver(input: AddNoteOnZverInput!): Note
+  # Add note to block
+  addNoteOnBlock(input: AddNoteOnBlockInput!): Note
+  # Add note to module
+  addNoteOnModule(input: AddNoteOnModuleInput!): Note
+  # Delete a note
+  deleteNote(input: DeleteNoteInput!): Note
+  # Edit a note
+  editNote(input: EditNoteInput!): Note
+}
+
+# Input for addZver Mutation
+input AddZverInput {
+  inv: String!
+  isWork: Boolean!
+}
+
+# Input for editZver Mutation
+input EditZverInput {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+}
+
+# Input for addBlock Mutation
+input AddBlockInput {
+  inv: String!
+  isWork: Boolean!
+  # Needed for blockUpdated Subscription filter
+  zverId: Int!
+}
+
+# Input for editBlock Mutation
+input DeleteBlockInput {
+  id: Int!
+  # Needed for blockUpdated Subscription filter
+  zverId: Int!
+}
+
+# Input for deleteBlock Mutation
+input EditBlockInput {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+  # Needed for blockUpdated Subscription filter
+  zverId: Int!
+}
+
+# Input for addModule Mutation
+input AddModuleInput {
+  inv: String!
+  isWork: Boolean!
+  # Needed for moduleUpdated Subscription filter
+  blockId: Int!
+  zverId: Int!
+}
+
+# Input for editModule Mutation
+input DeleteModuleInput {
+  id: Int!
+  # Needed for moduleUpdated Subscription filter
+  blockId: Int!
+}
+
+# Input for deleteModule Mutation
+input EditModuleInput {
+  id: Int!
+  inv: String!
+  isWork: Boolean!
+  # Needed for moduleUpdated Subscription filter
+  blockId: Int!
+  zverId: Int
+}
+
+# Input for addNoteOnZver Mutation
+input AddNoteOnZverInput {
+  content: String!
+  updated_at: String
+  user_id: String
+  # Needed for moduleUpdated Subscription filter
+  zverId: Int
+}
+
+# Input for AddNoteOnBlock Mutation
+input AddNoteOnBlockInput {
+  content: String!
+  updated_at: String
+  user_id: String
+  # Needed for moduleUpdated Subscription filter
+  blockId: Int
+}
+
+# Input for AddNoteOnModule Mutation
+input AddNoteOnModuleInput {
+  content: String!
+  updated_at: String
+  user_id: String
+  # Needed for moduleUpdated Subscription filter
+  moduleId: Int
+}
+
+# Input for editNote Mutation
+input DeleteNoteInput {
+  id: Int!
+  # Needed for moduleUpdated Subscription filter
+  zverId: Int
+  blockId: Int
+  moduleId: Int
+}
+
+# Input for deleteNote Mutation
+input EditNoteInput {
+  id: Int!
+  content: String!
+  updated_at: String
+  user_id: String
+  # Needed for moduleUpdated Subscription filter
+  zverId: Int
+  blockId: Int
+  moduleId: Int
+}
+
+extend type Subscription {
+  # Subscription for when editing a zver
+  zverUpdated(id: Int!): UpdateZverPayload
+  # Subscription for zver list
+  zversUpdated(endCursor: Int!): UpdateZverPayload
+  # Subscription for blocks
+  blockUpdated(zverId: Int!): UpdateBlockPayload
+  blockUpdatedEdit(id: Int!): UpdateBlockPayloadEdit
+  # Subscription for module
+  moduleUpdated(blockId: Int!): UpdateModulePayload
+  # Subscription for note
+  noteUpdated(zverId: Int!): UpdateNotePayload
+  noteUpdatedOnBlock(blockId: Int!): UpdateNotePayloadOnBlock
+  noteUpdatedOnModule(moduleId: Int!): UpdateNotePayloadOnModule
+}
+
+# Payload for zversUpdated Subscription
+type UpdateZverPayload {
+  mutation: String!
+  id: Int!
+  node: Zver
+}
+
+# Payload for blockUpdated Subscription
+type UpdateBlockPayload {
+  mutation: String!
+  id: Int
+  zverId: Int!
+  node: Block
+}
+
+type UpdateBlockPayloadEdit {
+  mutation: String!
+  id: Int!
+  node: Block
+}
+
+# Payload for moduleUpdated Subscription
+type UpdateModulePayload {
+  mutation: String!
+  id: Int
+  blockId: Int!
+  node: Module
+}
+
+# Payload for noteUpdated Subscription
+type UpdateNotePayload {
+  mutation: String!
+  id: Int
+  zverId: Int!
+  node: Note
+}
+
+type UpdateNotePayloadOnBlock {
+  mutation: String!
+  id: Int
+  blockId: Int!
+  node: Note
+}
+
+type UpdateNotePayloadOnModule {
+  mutation: String!
+  id: Int
+  moduleId: Int!
+  node: Note
+}

@@ -1,0 +1,12 @@
+#import "./Module.graphql"
+
+subscription onModuleUpdated($blockId: Int!) {
+  moduleUpdated(blockId: $blockId) {
+    mutation
+    id
+    blockId
+    node {
+      ...ModuleInfo
+    }
+  }
+}

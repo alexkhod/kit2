@@ -1,0 +1,5 @@
+#import "./Block.graphql"
+
+mutation addBlockClient($block: BlockInfo!) {
+  onBlockSelect(block: $block) @client
+}

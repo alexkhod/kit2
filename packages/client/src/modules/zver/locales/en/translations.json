@@ -1,0 +1,147 @@
+{
+  "navLink": "Zvers",
+  "notes": {
+    "title": "Notes",
+    "label": {
+      "field": "Note",
+      "add": "Add",
+      "edit": "Edit",
+      "note": "note"
+    },
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete"
+    },
+    "column": {
+      "content": "Note",
+      "actions": "Actions",
+      "updated": "Date",
+      "user": "User"
+    }
+
+  },
+
+  "blocks": {
+    "title": "Blocks",
+    "label": {
+      "field": "Inv number",
+      "isWork": "Work",
+      "add": "Add",
+      "edit": "Edit",
+      "block": "block"
+    },
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete"
+    },
+    "column": {
+      "content": "Inv number",
+      "actions": "Actions"
+    }
+  },
+  
+  "modules": {
+    "title": "Modules",
+    "label": {
+      "field": "Inv number",
+      "isWork": "Work",
+      "add": "Add",
+      "edit": "Edit",
+      "module": "module"
+    },
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete"
+    },
+    "column": {
+      "content": "Inv number",
+      "actions": "Actions"
+    }
+  },
+
+  "zver": {
+    "add": "Create zver",
+    "title": "Edit zver",
+    "title2": "Zver",
+    "meta": "Edit zver",
+    "loadMsg": "Loading...",
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete",
+      "back": "Back"
+    },
+    "label": {
+      "edit": "Edit",
+      "create": "Create",
+      "zver": "zver"
+    },
+    "field": {
+      "title": "Inv number",
+      "content": "Work"
+    }
+  },
+
+  "block": {
+    "title": "Edit block",
+    "title2": "Block",
+    "meta": "Edit block",
+    "loadMsg": "Loading...",
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete",
+      "back": "Back"
+    },
+    "label": {
+      "edit": "Edit",
+      "create": "Create",
+      "block": "block"
+    },
+    "field": {
+      "title": "Inv number",
+      "content": "Note",
+      "isWork": "Work"
+    }
+  },
+
+  "module": {
+    "title": "Edit module",
+    "title2": "Module",
+    "meta": "Edit module",
+    "loadMsg": "Loading...",
+    "btn": {
+      "edit": "Edit",
+      "submit": "Save",
+      "del": "Delete",
+      "back": "Back"
+    },
+    "label": {
+      "edit": "Edit",
+      "create": "Create",
+      "module": "module"
+    },
+    "field": {
+      "title": "Inv number",
+      "content": "Note",
+      "isWork": "Work"
+    }
+  },
+  "list": {
+    "title": "Zvers",
+    "meta": "Zvers",
+    "column": {
+      "title": "Inv number",
+      "actions": "Actions"
+    },
+    "btn": {
+      "add": "Add",
+      "del": "Delete",
+      "more": "Load more ..."
+    },
+    "subTitle": "Zver list"
+  }
+}

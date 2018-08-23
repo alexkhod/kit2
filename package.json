@@ -21,6 +21,7 @@
     "tslint": "tslint --fix -p tsconfig.json -c tslint.json",
     "lint": "yarn eslint && yarn tslint",
     "seed": "lerna run --scope=server seed --stream",
+    "seed-prod": "cross-env NODE_ENV=production lerna run --scope=server seed --stream",
     "exp-publish": "lerna run --scope=mobile exp-publish --stream",
     "watch": "spin watch",
     "heroku-postbuild": "lerna run heroku-postbuild --stream",

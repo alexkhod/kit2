@@ -1,0 +1,5 @@
+#import "./Module.graphql"
+
+mutation addModuleClient($module: ModuleInfo!) {
+  onModuleSelect(module: $module) @client
+}

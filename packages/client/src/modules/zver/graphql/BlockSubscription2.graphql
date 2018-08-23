@@ -1,0 +1,11 @@
+#import "./Block.graphql"
+
+subscription onBlockUpdatedEdit($id: Int!) {
+  blockUpdatedEdit(id: $id) {
+    mutation
+    id
+    node {
+      ...BlockInfo
+    }
+  }
+}

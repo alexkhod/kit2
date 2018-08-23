@@ -1,0 +1,7 @@
+#import "./Module.graphql"
+
+mutation editModule($input: EditModuleInput!) {
+  editModule(input: $input) {
+    ...ModuleInfo
+  }
+}

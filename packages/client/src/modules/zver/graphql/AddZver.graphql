@@ -1,0 +1,15 @@
+#import "./Zver.graphql"
+#import "./Note.graphql"
+#import "./Block.graphql"
+
+mutation addZver($input: AddZverInput!) {
+  addZver(input: $input) {
+    ...ZverInfo
+    notes {
+      ...NoteInfo
+    }
+    blocks {
+      ...BlockInfo
+    }
+  }
+}

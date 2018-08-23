@@ -1,0 +1,11 @@
+#import "./Module.graphql"
+#import "./Note.graphql"
+
+mutation addModule($input: AddModuleInput!) {
+  addModule(input: $input) {
+    ...ModuleInfo
+    notes {
+      ...NoteInfo
+    }
+  }
+}

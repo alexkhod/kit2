@@ -1,0 +1,12 @@
+#import "./Block.graphql"
+
+subscription onBlockUpdated($zverId: Int!) {
+  blockUpdated(zverId: $zverId) {
+    mutation
+    id
+    zverId
+    node {
+      ...BlockInfo
+    }
+  }
+}

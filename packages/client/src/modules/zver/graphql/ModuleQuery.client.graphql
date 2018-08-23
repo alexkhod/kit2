@@ -1,0 +1,6 @@
+#import "./Module.graphql"
+query moduleState {
+  module @client {
+    ...ModuleInfo
+  }
+}

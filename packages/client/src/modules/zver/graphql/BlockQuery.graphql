@@ -1,0 +1,15 @@
+#import "./Block.graphql"
+#import "./Note.graphql"
+#import "./Module.graphql"
+
+query block($id: Int!) {
+  block(id: $id) {
+    ...BlockInfo
+    notes {
+      ...NoteInfo
+    }
+    modules {
+      ...ModuleInfo
+    }
+  }
+}

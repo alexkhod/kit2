@@ -1,0 +1,15 @@
+#import "./Zver.graphql"
+#import "./Note.graphql"
+#import "./Block.graphql"
+
+query zver($id: Int!) {
+  zver(id: $id) {
+    ...ZverInfo
+    notes {
+      ...NoteInfo
+    }
+    blocks {
+      ...BlockInfo
+    }
+  }
+}

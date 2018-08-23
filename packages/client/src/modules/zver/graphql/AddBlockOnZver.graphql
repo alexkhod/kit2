@@ -1,0 +1,15 @@
+#import "./Block.graphql"
+#import "./Note.graphql"
+#import "./Module.graphql"
+
+mutation addBlock($input: AddBlockInput!) {
+  addBlock(input: $input) {
+    ...BlockInfo
+    notes {
+      ...NoteInfo
+    }
+    modules {
+      ...ModuleInfo
+    }
+  }
+}

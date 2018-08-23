@@ -1,0 +1,12 @@
+#import "./Note.graphql"
+
+subscription onNoteUpdated($zverId: Int!) {
+  noteUpdated(zverId: $zverId) {
+    mutation
+    id
+    zverId
+    node {
+      ...NoteInfo
+    }
+  }
+}

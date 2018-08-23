@@ -1,0 +1,7 @@
+#import "./Note.graphql"
+
+mutation addNoteOnBlock($input: AddNoteOnBlockInput!) {
+  addNoteOnBlock(input: $input) {
+    ...NoteInfo
+  }
+}

@@ -1,0 +1,17 @@
+#import "./Zver.graphql"
+
+query zvers($limit: Int!, $after: Int) {
+  zvers(limit: $limit, after: $after) {
+    totalCount
+    edges {
+      cursor
+      node {
+        ...ZverInfo
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

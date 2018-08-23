@@ -1,0 +1,12 @@
+#import "./Note.graphql"
+
+subscription onNoteUpdatedOnBlock($blockId: Int!) {
+  noteUpdatedOnBlock(blockId: $blockId) {
+    mutation
+    id
+    blockId
+    node {
+      ...NoteInfo
+    }
+  }
+}

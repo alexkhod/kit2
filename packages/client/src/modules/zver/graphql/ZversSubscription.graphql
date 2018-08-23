@@ -1,0 +1,10 @@
+#import "./Zver.graphql"
+
+subscription onZversUpdated($endCursor: Int!) {
+  zversUpdated(endCursor: $endCursor) {
+    mutation
+    node {
+      ...ZverInfo
+    }
+  }
+}
