@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
+import Recaptcha from 'react-grecaptcha';
 
 import translate from '../../../i18n';
 import Field from '../../../utils/FieldAdapter';
@@ -15,8 +16,15 @@ const registerFormSchema = {
 };
 
 const validate = values => validateForm(values, registerFormSchema);
+let c = '';
+const verifyCallback = response => (c = response);
+const expiredCallback = () => {
+  console.log('expired!');
+};
+const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
 
 const RegisterForm = ({ values, handleSubmit, submitting, error, t }) => {
+  console.log(c);
   return (
     <Form name="register" onSubmit={handleSubmit}>
       <Field
@@ -41,6 +49,15 @@ const RegisterForm = ({ values, handleSubmit, submitting, error, t }) => {
         label={t('reg.form.field.passConf')}
         value={values.passwordConfirmation}
       />
+      <Recaptcha
+        sitekey={RECAPTCHA_SITE_KEY}
+        callback={verifyCallback}
+        expiredCallback={expiredCallback}
+        locale="ru-RU"
+        className="customClassName"
+        // Other props will be passed into the component.
+        data-theme="light"
+      />
       <div className="text-center">
         {error && <Alert color="error">{error}</Alert>}
         <Button color="primary" type="submit" disabled={submitting}>
@@ -60,7 +77,7 @@ RegisterForm.propTypes = {
 };
 
 const RegisterFormWithFormik = withFormik({
-  mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '' }),
+  mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '', captcha: c }),
   validate: values => validate(values),
   async handleSubmit(
     values,

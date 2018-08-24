@@ -11275,6 +11275,14 @@ react-google-maps@^7.3.0:
     scriptjs "2.5.8"
     warning "3.0.0"
 
+react-grecaptcha@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/react-grecaptcha/-/react-grecaptcha-1.2.5.tgz#886e1df8bac7c1350b23b28b64a29a64f823e684"
+  dependencies:
+    classnames "^2.2.5"
+    lodash.omit "^4.5.0"
+    prop-types "^15.6.0"
+
 react-helmet@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.0.tgz#a81811df21313a6d55c5f058c4aeba5d6f3d97a7"
