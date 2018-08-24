@@ -12,19 +12,18 @@ const registerFormSchema = {
   username: [required, minLength(3)],
   email: [required, email],
   password: [required, minLength(8)],
-  passwordConfirmation: [match('password'), required, minLength(8)]
+  passwordConfirmation: [match('password'), required, minLength(8)],
+  c: [required]
 };
 
 const validate = values => validateForm(values, registerFormSchema);
-let c = '';
-const verifyCallback = response => (c = response);
-const expiredCallback = () => {
-  console.log('expired!');
-};
+//let cap = '';
+// const verifyCallback = response => (cap = response);
+//
 const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
 
-const RegisterForm = ({ values, handleSubmit, submitting, error, t }) => {
-  console.log(c);
+const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, submitting, error, t }) => {
+  console.log(values);
   return (
     <Form name="register" onSubmit={handleSubmit}>
       <Field
@@ -49,15 +48,23 @@ const RegisterForm = ({ values, handleSubmit, submitting, error, t }) => {
         label={t('reg.form.field.passConf')}
         value={values.passwordConfirmation}
       />
-      <Recaptcha
-        sitekey={RECAPTCHA_SITE_KEY}
-        callback={verifyCallback}
-        expiredCallback={expiredCallback}
-        locale="ru-RU"
-        className="customClassName"
-        // Other props will be passed into the component.
-        data-theme="light"
-      />
+      <div className="form-group">
+        <label>{t('reg.form.field.passConf')}</label>
+        <Recaptcha
+          sitekey={RECAPTCHA_SITE_KEY}
+          callback={response => {
+            setFieldValue('c', response);
+          }}
+          expiredCallback={() => {
+            setFieldValue('c', '');
+          }}
+          locale="ru-RU"
+          className="customClassName"
+          // Other props will be passed into the component.
+          data-theme="light"
+        />
+        {errors.c && touched.c && <p>{t('reg.form.field.passConf')}</p>}
+      </div>
       <div className="text-center">
         {error && <Alert color="error">{error}</Alert>}
         <Button color="primary" type="submit" disabled={submitting}>
@@ -73,11 +80,14 @@ RegisterForm.propTypes = {
   submitting: PropTypes.bool,
   error: PropTypes.string,
   values: PropTypes.object,
-  t: PropTypes.func
+  t: PropTypes.func,
+  setFieldValue: PropTypes.func,
+  errors: PropTypes.object,
+  touched: PropTypes.object
 };
 
 const RegisterFormWithFormik = withFormik({
-  mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '', captcha: c }),
+  mapPropsToValues: () => ({ username: '', email: '', password: '', passwordConfirmation: '', c: '' }),
   validate: values => validate(values),
   async handleSubmit(
     values,

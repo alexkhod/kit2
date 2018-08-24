@@ -20,12 +20,12 @@ class Register extends React.Component {
 const RegisterWithApollo = compose(
   graphql(REGISTER, {
     props: ({ ownProps: { history, navigation }, mutate }) => ({
-      register: async ({ username, email, password, captcha }) => {
+      register: async ({ username, email, password, c }) => {
         try {
           const {
             data: { register }
           } = await mutate({
-            variables: { input: { username, email, password, captcha } }
+            variables: { input: { username, email, password, c } }
           });
 
           if (register.errors) {
