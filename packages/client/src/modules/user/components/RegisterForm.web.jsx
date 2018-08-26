@@ -8,6 +8,8 @@ import Field from '../../../utils/FieldAdapter';
 import { Form, RenderField, Button, Alert } from '../../common/components/web';
 import { match, email, minLength, required, validateForm } from '../../../../../common/validation';
 
+import settings from '../../../../../../settings';
+
 const registerFormSchema = {
   username: [required, minLength(3)],
   email: [required, email],
@@ -20,7 +22,8 @@ const validate = values => validateForm(values, registerFormSchema);
 //let cap = '';
 // const verifyCallback = response => (cap = response);
 //
-const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
+//const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
+const RECAPTCHA_SITE_KEY = settings.user.recaptchasitekey;
 
 const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, submitting, error, t }) => {
   console.log(values);
@@ -49,7 +52,7 @@ const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, su
         value={values.passwordConfirmation}
       />
       <div className="form-group">
-        <label>{t('reg.form.field.passConf')}</label>
+        <label>{t('reg.form.field.reCaptcha')}</label>
         <Recaptcha
           sitekey={RECAPTCHA_SITE_KEY}
           callback={response => {
@@ -63,7 +66,7 @@ const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, su
           // Other props will be passed into the component.
           data-theme="light"
         />
-        {errors.c && touched.c && <p>{t('reg.form.field.passConf')}</p>}
+        {errors.c && touched.c && <p>{t('reg.form.field.reCaptchaError')}</p>}
       </div>
       <div className="text-center">
         {error && <Alert color="error">{error}</Alert>}

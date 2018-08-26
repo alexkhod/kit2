@@ -16,6 +16,9 @@
       "passwordsIsNotMatch": "Пароли не совпадают.",
       "passwordLength": "Длина пароля должна составлять 8 символов и больше.",
       "invalidToken": "Не действительный токен"
+    },
+    "recaptcha": {
+      "reCaptchaIsNotValid": "Капча не пройдена, попробуйте еще раз."
     }
   }
 }

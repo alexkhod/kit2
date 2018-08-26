@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { pick } from 'lodash';
 import jwt from 'jsonwebtoken';
+import fetch from 'isomorphic-fetch';
 
 import access from '../../access';
 import User from '../../sql';
@@ -61,6 +62,28 @@ export default () => ({
         const emailExists = await User.getUserByEmail(input.email);
         if (emailExists) {
           e.setError('email', t('user:auth.password.emailIsExisted'));
+        }
+
+        const FormData = require('form-data');
+        const form = new FormData();
+        form.append('secret', settings.user.recaptchasecret);
+        form.append('response', input.c);
+        const reCaptchaIsValid = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+          method: 'POST',
+          body: form
+        })
+          .then(function(response) {
+            if (response.status >= 400) {
+              throw new Error('Bad response from server');
+            }
+            return response.json();
+          })
+          .then(function(data) {
+            return data.success;
+          });
+
+        if (!reCaptchaIsValid) {
+          e.setError('c', t('user:auth.recaptcha.reCaptchaIsNotValid'));
         }
 
         e.throwIf();

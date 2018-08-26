@@ -18,6 +18,7 @@ input RegisterUserInput {
   username: String!
   email: String!
   password: String!
+  c: String!
 }
 
 input ForgotPasswordInput {

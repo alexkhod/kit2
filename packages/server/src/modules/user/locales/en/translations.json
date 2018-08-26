@@ -17,6 +17,9 @@
       "passwordsIsNotMatch": "Passwords do not match.",
       "passwordLength": "Password must be 8 characters or more.",
       "invalidToken": "Invalid token"
+    },
+    "recaptcha": {
+      "reCaptchaIsNotValid": "Invalid captcha, try again."
     }
   }
 }

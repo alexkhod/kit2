@@ -77,7 +77,9 @@
         "name": "Username",
         "email": "Email",
         "pass": "Password",
-        "passConf": "Password Confirmation"
+        "passConf": "Password Confirmation",
+        "reCaptcha": "Confirm that you are not a bot",
+        "reCaptchaError": "Captcha failed"
       },
       "btnSubmit": "Register"
     }

@@ -1,6 +1,8 @@
 const CERTIFICATE_DEVSERIAL = '00';
 export default {
   secret: process.env.NODE_ENV === 'test' ? 'secret for tests' : process.env.AUTH_SECRET,
+  recaptchasecret: process.env.GOOGLE_RECAPTCHASECRET,
+  recaptchasitekey: process.env.GOOGLE_RECAPTCHASITEKEY,
   auth: {
     access: {
       session: {
