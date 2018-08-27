@@ -39,7 +39,7 @@ config.options.devProxy = config.options.ssr;
 
 if (process.env.NODE_ENV === 'production') {
   config.options.defines.__SERVER_PORT__ = 8080;
-  config.options.defines.__WEBSITE_URL__ = '"https://apollo-universal-starter-kit.herokuapp.com"';
+  config.options.defines.__WEBSITE_URL__ = '"https://btloto.ru"';
   // Generating source maps for production will slowdown compilation for roughly 25%
   config.options.sourceMap = false;
 }
