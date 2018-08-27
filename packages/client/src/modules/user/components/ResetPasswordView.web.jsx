@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
 import ResetPasswordForm from '../components/ResetPasswordForm';
-import { PageLayout } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
 
@@ -42,7 +42,7 @@ class ResetPasswordView extends React.Component {
 
     const renderMetaData = () => (
       <Helmet
-        title={`${settings.app.name} - ${t('resetPass.title')}`}
+        title={`${t('resetPass.title')}`} // title={`${settings.app.name} - ${t('resetPass.title')}`}
         meta={[
           {
             name: 'description',
@@ -53,11 +53,11 @@ class ResetPasswordView extends React.Component {
     );
 
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData()}
         <h1>{t('resetPass.form.title')}</h1>
         <ResetPasswordForm onSubmit={this.onSubmit(resetPassword)} />
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
 import { LayoutCenter } from '../../common/components';
-import { PageLayout, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
+import { PageLayoutN, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
 
 import LoginForm from './LoginForm';
 import settings from '../../../../../../settings';
@@ -37,7 +37,7 @@ class LoginView extends React.PureComponent {
 
     const renderMetaData = () => (
       <Helmet
-        title={`${settings.app.name} - ${t('login.title')}`}
+        title={`${t('login.title')}`} // title={`${settings.app.name} - ${t('login.title')}`}
         meta={[
           {
             name: 'description',
@@ -48,7 +48,7 @@ class LoginView extends React.PureComponent {
     );
 
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData()}
         <LayoutCenter>
           <h1 className="text-center">{t('login.form.title')}</h1>
@@ -63,7 +63,7 @@ class LoginView extends React.PureComponent {
             </CardGroup>
           </Card>
         </LayoutCenter>
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }

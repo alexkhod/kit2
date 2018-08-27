@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import translate from '../../../i18n';
 import RegisterForm from '../components/RegisterForm';
 import { LayoutCenter } from '../../common/components';
-import { PageLayout } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
 
@@ -32,7 +32,7 @@ class RegisterView extends React.PureComponent {
 
   renderMetaData = t => (
     <Helmet
-      title={`${settings.app.name} - ${t('reg.title')}`}
+      title={`${t('reg.title')}`} // title={`${settings.app.name} - ${t('reg.title')}`}
       meta={[
         {
           name: 'description',
@@ -45,13 +45,13 @@ class RegisterView extends React.PureComponent {
   render() {
     const { t } = this.props;
     return (
-      <PageLayout>
+      <PageLayoutN>
         {this.renderMetaData(t)}
         <LayoutCenter>
           <h1 className="text-center">{t('reg.form.title')}</h1>
           <RegisterForm onSubmit={this.onSubmit} />
         </LayoutCenter>
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { PageLayout } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web';
 
 import UserForm from './UserForm';
 import settings from '../../../../../../settings';
@@ -31,7 +31,7 @@ class UserEditView extends React.PureComponent {
 
   renderMetaData = t => (
     <Helmet
-      title={`${settings.app.name} - ${t('userEdit.title')}`}
+      title={`${t('userEdit.title')}`} // title={`${settings.app.name} - ${t('userEdit.title')}`}
       meta={[
         {
           name: 'description',
@@ -46,15 +46,15 @@ class UserEditView extends React.PureComponent {
 
     if (loading && !user) {
       return (
-        <PageLayout>
+        <PageLayoutN>
           {this.renderMetaData(t)}
           <div className="text-center">{t('userEdit.loadMsg')}</div>
-        </PageLayout>
+        </PageLayoutN>
       );
     } else {
       const isNotSelf = !user || (user && user.id !== currentUser.id);
       return (
-        <PageLayout>
+        <PageLayoutN>
           {this.renderMetaData(t)}
           <Link id="back-button" to={user && user.role === 'admin' ? '/users' : '/profile'}>
             Back
@@ -68,7 +68,7 @@ class UserEditView extends React.PureComponent {
             shouldActiveDisplay={isNotSelf}
             initialValues={user}
           />
-        </PageLayout>
+        </PageLayoutN>
       );
     }
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { PageLayout } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web';
 
 import UserForm from './UserForm';
 import settings from '../../../../../../settings';
@@ -33,7 +33,7 @@ class UserAddView extends React.PureComponent {
 
   renderMetaData = t => (
     <Helmet
-      title={`${settings.app.name} - ${t('userEdit.title')}`}
+      title={`${settings.app.name} - ${t('userEdit.title')}`} // title={`${settings.app.name} - ${t('userEdit.title')}`}
       meta={[
         {
           name: 'description',
@@ -47,7 +47,7 @@ class UserAddView extends React.PureComponent {
     const { t } = this.props;
 
     return (
-      <PageLayout>
+      <PageLayoutN>
         {this.renderMetaData(t)}
         <Link id="back-button" to="/users">
           Back
@@ -61,7 +61,7 @@ class UserAddView extends React.PureComponent {
           shouldRoleDisplay={true}
           shouldActiveDisplay={true}
         />
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }

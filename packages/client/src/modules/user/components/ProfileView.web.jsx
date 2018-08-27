@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 import translate from '../../../i18n';
 import SubscriptionProfile from '../../subscription/containers/SubscriptionProfile';
 import { LayoutCenter } from '../../common/components';
-import { Card, CardGroup, CardTitle, CardText, PageLayout } from '../../common/components/web';
+import { Card, CardGroup, CardTitle, CardText, PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
 
 const renderMetaData = t => {
   return (
     <Helmet
-      title={`${settings.app.name} - ${t('profile.title')}`}
+      title={`${t('profile.title')}`} // title={`${settings.app.name} - ${t('profile.title')}`}
       meta={[
         {
           name: 'description',
@@ -27,14 +27,14 @@ const renderMetaData = t => {
 const ProfileView = ({ currentUserLoading, currentUser, t }) => {
   if (currentUserLoading && !currentUser) {
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData(t)}
         <div className="text-center">{t('profile.loadMsg')}</div>
-      </PageLayout>
+      </PageLayoutN>
     );
   } else if (currentUser) {
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData(t)}
         <LayoutCenter>
           <h1 className="text-center">{t('profile.card.title')}</h1>
@@ -67,14 +67,14 @@ const ProfileView = ({ currentUserLoading, currentUser, t }) => {
             {t('profile.editProfileText')}
           </Link>
         </LayoutCenter>
-      </PageLayout>
+      </PageLayoutN>
     );
   } else {
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData(t)}
         <h2>{t('profile.errorMsg')}</h2>
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 };

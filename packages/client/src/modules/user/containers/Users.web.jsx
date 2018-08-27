@@ -7,7 +7,7 @@ import { compose } from 'react-apollo';
 import settings from '../../../../../../settings';
 import translate from '../../../i18n';
 import UsersFilterView from '../components/UsersFilterView';
-import { Button, PageLayout } from '../../common/components/web';
+import { Button, PageLayoutN } from '../../common/components/web';
 import UsersListView from '../components/UsersListView';
 import withSubscription from './withSubscription';
 import {
@@ -34,7 +34,7 @@ class Users extends React.Component {
   renderMetaData() {
     return (
       <Helmet
-        title={`${settings.app.name} - ${this.props.t('users.title')}`}
+        title={`${this.props.t('users.title')}`} // title={`${settings.app.name} - ${this.props.t('users.title')}`}
         meta={[
           {
             name: 'description',
@@ -47,7 +47,7 @@ class Users extends React.Component {
 
   render() {
     return (
-      <PageLayout>
+      <PageLayoutN>
         {this.renderMetaData()}
         <h2>{this.props.t('users.list.title')}</h2>
         <Link to="/users/new">
@@ -57,7 +57,7 @@ class Users extends React.Component {
         <UsersFilterView {...this.props} />
         <hr />
         <UsersListView {...this.props} />
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }

@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import translate from '../../../i18n';
 import ForgotPasswordForm from '../components/ForgotPasswordForm';
 import { LayoutCenter } from '../../common/components';
-import { PageLayout } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
 
@@ -39,7 +39,7 @@ class ForgotPasswordView extends React.Component {
 
     const renderMetaData = () => (
       <Helmet
-        title={`${settings.app.name} - ${t('forgotPass.title')}`}
+        title={`${t('forgotPass.title')}`} // title={`${settings.app.name} - ${t('forgotPass.title')}`}
         meta={[
           {
             name: 'description',
@@ -50,13 +50,13 @@ class ForgotPasswordView extends React.Component {
     );
 
     return (
-      <PageLayout>
+      <PageLayoutN>
         {renderMetaData()}
         <LayoutCenter>
           <h1 className="text-center">{t('forgotPass.form.title')}</h1>
           <ForgotPasswordForm onSubmit={this.onSubmit({ forgotPassword, t })} sent={this.state.sent} />
         </LayoutCenter>
-      </PageLayout>
+      </PageLayoutN>
     );
   }
 }
