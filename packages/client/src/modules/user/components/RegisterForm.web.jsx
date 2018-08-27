@@ -8,7 +8,7 @@ import Field from '../../../utils/FieldAdapter';
 import { Form, RenderField, Button, Alert } from '../../common/components/web';
 import { match, email, minLength, required, validateForm } from '../../../../../common/validation';
 
-import settings from '../../../../../../settings';
+//import settings from '../../../../../../settings';
 
 const registerFormSchema = {
   username: [required, minLength(3)],
@@ -23,10 +23,10 @@ const validate = values => validateForm(values, registerFormSchema);
 // const verifyCallback = response => (cap = response);
 //
 //const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
-const RECAPTCHA_SITE_KEY = settings.user.recaptchasitekey;
+//const RECAPTCHA_SITE_KEY = settings.user.recaptchasitekey;
 
 const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, submitting, error, t }) => {
-  console.log(values);
+  //console.log(values);
   return (
     <Form name="register" onSubmit={handleSubmit}>
       <Field
@@ -54,7 +54,7 @@ const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, su
       <div className="form-group">
         <label>{t('reg.form.field.reCaptcha')}</label>
         <Recaptcha
-          sitekey={RECAPTCHA_SITE_KEY}
+          sitekey="6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-"
           callback={response => {
             setFieldValue('c', response);
           }}

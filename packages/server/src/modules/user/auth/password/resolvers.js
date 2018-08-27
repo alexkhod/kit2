@@ -64,6 +64,8 @@ export default () => ({
           e.setError('email', t('user:auth.password.emailIsExisted'));
         }
 
+        e.throwIf();
+
         const FormData = require('form-data');
         const form = new FormData();
         form.append('secret', settings.user.recaptchasecret);
@@ -79,6 +81,7 @@ export default () => ({
             return response.json();
           })
           .then(function(data) {
+            //console.log('________________', data);
             return data.success;
           });
 
