@@ -1,10 +1,20 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-import ZverNoteForm from './ZverNoteForm';
+// import ZverNoteForm from './ZverNoteForm';
+import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
+
+const AsyncZverNoteForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverNoteForm" */ './ZverNoteForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './ZverNoteForm')
+});
 
 class ZverNotesView extends React.PureComponent {
   static propTypes = {
@@ -115,7 +125,7 @@ class ZverNotesView extends React.PureComponent {
       <div>
         <h3>{t('notes.title')}</h3>
         <IfLoggedIn>
-          <ZverNoteForm zverId={zverId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
+          <AsyncZverNoteForm zverId={zverId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
         </IfLoggedIn>
         <h1 />
         <IfLoggedIn>

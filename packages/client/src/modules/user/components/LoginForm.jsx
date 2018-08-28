@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -9,11 +11,40 @@ import Field from '../../../utils/FieldAdapter';
 import { RenderField, Button, primary, FormView } from '../../common/components/native';
 import { placeholderColor, submit } from '../../common/components/native/styles';
 import { required, minLength, validateForm } from '../../../../../common/validation';
-import FacebookButton from '../auth/facebook';
-import GoogleButton from '../auth/google';
-import GitHubButton from '../auth/github';
-import LinkedInButton from '../auth/linkedin';
+// import FacebookButton from '../auth/facebook';
+// import GoogleButton from '../auth/google';
+// import GitHubButton from '../auth/github';
+// import LinkedInButton from '../auth/linkedin';
+import Loading from './Loading';
 import settings from '../../../../../../settings';
+
+const AsyncFacebookButton = Loadable({
+  loader: () => import(/* webpackChunkName: "FacebookButton" */ '../auth/facebook'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/facebook')
+});
+
+const AsyncGoogleButton = Loadable({
+  loader: () => import(/* webpackChunkName: "GoogleButton" */ '../auth/google'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/google')
+});
+
+const AsyncGitHubButton = Loadable({
+  loader: () => import(/* webpackChunkName: "GitHubButton" */ '../auth/github'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/github')
+});
+
+const AsyncLinkedInButton = Loadable({
+  loader: () => import(/* webpackChunkName: "LinkedInButton" */ '../auth/linkedin'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/linkedin')
+});
 
 const loginFormSchema = {
   usernameOrEmail: [required, minLength(3)],
@@ -26,17 +57,17 @@ const { facebook, linkedin, google, github } = settings.user.auth;
 const renderSocialButtons = (buttonsLength, t) => {
   return buttonsLength > 2 ? (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-      {facebook.enabled && <FacebookButton text={t('login.fbBtn')} type="icon" />}
-      {google.enabled && <GoogleButton text={t('login.googleBtn')} type="icon" />}
-      {github.enabled && <GitHubButton text={t('login.githubBtn')} type="icon" />}
-      {linkedin.enabled && <LinkedInButton text={t('login.linkedinBtn')} type="icon" />}
+      {facebook.enabled && <AsyncFacebookButton text={t('login.fbBtn')} type="icon" />}
+      {google.enabled && <AsyncGoogleButton text={t('login.googleBtn')} type="icon" />}
+      {github.enabled && <AsyncGitHubButton text={t('login.githubBtn')} type="icon" />}
+      {linkedin.enabled && <AsyncLinkedInButton text={t('login.linkedinBtn')} type="icon" />}
     </View>
   ) : buttonsLength > 0 ? (
     <View>
-      {facebook.enabled && <FacebookButton text={t('login.fbBtn')} type="button" />}
-      {google.enabled && <GoogleButton text={t('login.googleBtn')} type="button" />}
-      {github.enabled && <GitHubButton text={t('login.githubBtn')} type="button" />}
-      {linkedin.enabled && <LinkedInButton text={t('login.linkedinBtn')} type="button" />}
+      {facebook.enabled && <AsyncFacebookButton text={t('login.fbBtn')} type="button" />}
+      {google.enabled && <AsyncGoogleButton text={t('login.googleBtn')} type="button" />}
+      {github.enabled && <AsyncGitHubButton text={t('login.githubBtn')} type="button" />}
+      {linkedin.enabled && <AsyncLinkedInButton text={t('login.linkedinBtn')} type="button" />}
     </View>
   ) : null;
 };

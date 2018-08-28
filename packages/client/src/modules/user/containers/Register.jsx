@@ -1,19 +1,29 @@
 // React
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 
 // Apollo
 import { graphql, compose } from 'react-apollo';
 
 // Components
-import RegisterView from '../components/RegisterView';
+// import RegisterView from '../components/RegisterView';
+import Loading from '../components/Loading';
 
 import REGISTER from '../graphql/Register.graphql';
 
 import settings from '../../../../../../settings';
 
+const AsyncRegisterView = Loadable({
+  loader: () => import(/* webpackChunkName: "RegisterView" */ '../components/RegisterView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/RegisterView')
+});
+
 class Register extends React.Component {
   render() {
-    return <RegisterView {...this.props} />;
+    return <AsyncRegisterView {...this.props} />;
   }
 }
 

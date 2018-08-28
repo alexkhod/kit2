@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { NavLink, Link } from 'react-router-dom';
@@ -7,12 +9,41 @@ import translate from '../../../i18n';
 import Field from '../../../utils/FieldAdapter';
 import { Form, RenderField, Alert, Button } from '../../common/components/web';
 import { required, minLength, validateForm } from '../../../../../common/validation';
-import FacebookButton from '../auth/facebook';
-import GoogleButton from '../auth/google';
-import LinkedInButton from '../auth/linkedin';
-import GitHubButton from '../auth/github';
+// import FacebookButton from '../auth/facebook';
+// import GoogleButton from '../auth/google';
+// import LinkedInButton from '../auth/linkedin';
+// import GitHubButton from '../auth/github';
+import Loading from './Loading';
 
 import settings from '../../../../../../settings';
+
+const AsyncFacebookButton = Loadable({
+  loader: () => import(/* webpackChunkName: "FacebookButton" */ '../auth/facebook'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/facebook')
+});
+
+const AsyncGoogleButton = Loadable({
+  loader: () => import(/* webpackChunkName: "GoogleButton" */ '../auth/google'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/google')
+});
+
+const AsyncLinkedInButton = Loadable({
+  loader: () => import(/* webpackChunkName: "LinkedInButton" */ '../auth/linkedin'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/linkedin')
+});
+
+const AsyncGitHubButton = Loadable({
+  loader: () => import(/* webpackChunkName: "GitHubButton" */ '../auth/github'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../auth/github')
+});
 
 const loginFormSchema = {
   usernameOrEmail: [required, minLength(3)],
@@ -27,22 +58,22 @@ const renderSocialButtons = (buttonsLength, t) => {
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: 200 }}>
       {settings.user.auth.facebook.enabled && (
         <div className="text-center">
-          <FacebookButton text={t('login.fbBtn')} type={'icon'} />
+          <AsyncFacebookButton text={t('login.fbBtn')} type={'icon'} />
         </div>
       )}
       {settings.user.auth.google.enabled && (
         <div className="text-center">
-          <GoogleButton text={t('login.googleBtn')} type={'icon'} />
+          <AsyncGoogleButton text={t('login.googleBtn')} type={'icon'} />
         </div>
       )}
       {settings.user.auth.github.enabled && (
         <div className="text-center">
-          <GitHubButton text={t('login.githubBtn')} type={'icon'} />
+          <AsyncGitHubButton text={t('login.githubBtn')} type={'icon'} />
         </div>
       )}
       {settings.user.auth.linkedin.enabled && (
         <div className="text-center">
-          <LinkedInButton text={t('login.linkedinBtn')} type={'icon'} />
+          <AsyncLinkedInButton text={t('login.linkedinBtn')} type={'icon'} />
         </div>
       )}
     </div>
@@ -50,22 +81,22 @@ const renderSocialButtons = (buttonsLength, t) => {
     <div>
       {settings.user.auth.facebook.enabled && (
         <div className="text-center">
-          <FacebookButton text={t('login.fbBtn')} type={'button'} />
+          <AsyncFacebookButton text={t('login.fbBtn')} type={'button'} />
         </div>
       )}
       {settings.user.auth.google.enabled && (
         <div className="text-center">
-          <GoogleButton text={t('login.googleBtn')} type={'button'} />
+          <AsyncGoogleButton text={t('login.googleBtn')} type={'button'} />
         </div>
       )}
       {settings.user.auth.github.enabled && (
         <div className="text-center">
-          <GitHubButton text={t('login.githubBtn')} type={'button'} />
+          <AsyncGitHubButton text={t('login.githubBtn')} type={'button'} />
         </div>
       )}
       {settings.user.auth.linkedin.enabled && (
         <div className="text-center">
-          <LinkedInButton text={t('login.linkedinBtn')} type={'button'} />
+          <AsyncLinkedInButton text={t('login.linkedinBtn')} type={'button'} />
         </div>
       )}
     </div>

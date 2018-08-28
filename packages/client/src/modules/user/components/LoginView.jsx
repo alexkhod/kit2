@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, Linking, Platform } from 'react-native';
 import { WebBrowser } from 'expo';
@@ -7,10 +9,18 @@ import { placeholderColor } from '../../common/components/native/styles';
 import settings from '../../../../../../settings';
 import translate from '../../../i18n';
 
-import LoginForm from './LoginForm';
+// import LoginForm from './LoginForm';
+import Loading from './Loading';
 
 import { setItem } from '../../common/clientStorage';
 import CURRENT_USER_QUERY from '../graphql/CurrentUserQuery.graphql';
+
+const AsyncLoginForm = Loadable({
+  loader: () => import(/* webpackChunkName: "LoginForm" */ './LoginForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './LoginForm')
+});
 
 class LoginView extends React.PureComponent {
   componentDidMount() {
@@ -72,7 +82,7 @@ class LoginView extends React.PureComponent {
       <View style={styles.container}>
         <View style={styles.examplesContainer}>{this.renderAvailableLogins()}</View>
         <View style={styles.loginContainer}>
-          <LoginForm onSubmit={this.onSubmit(login)} navigation={navigation} />
+          <AsyncLoginForm onSubmit={this.onSubmit(login)} navigation={navigation} />
         </View>
       </View>
     );

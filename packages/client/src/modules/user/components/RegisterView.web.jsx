@@ -1,13 +1,23 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
-import RegisterForm from '../components/RegisterForm';
+// import RegisterForm from '../components/RegisterForm';
+import Loading from './Loading';
 import { LayoutCenter } from '../../common/components';
 import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
+
+const AsyncRegisterForm = Loadable({
+  loader: () => import(/* webpackChunkName: "RegisterForm" */ '../components/RegisterForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/RegisterForm')
+});
 
 class RegisterView extends React.PureComponent {
   static propTypes = {
@@ -49,7 +59,7 @@ class RegisterView extends React.PureComponent {
         {this.renderMetaData(t)}
         <LayoutCenter>
           <h1 className="text-center">{t('reg.form.title')}</h1>
-          <RegisterForm onSubmit={this.onSubmit} />
+          <AsyncRegisterForm onSubmit={this.onSubmit} />
         </LayoutCenter>
       </PageLayoutN>
     );

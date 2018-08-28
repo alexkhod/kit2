@@ -1,13 +1,37 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { PageLayoutN } from '../../common/components/web';
-import BlockForm from './BlockForm';
-import BlockNotes from '../containers/BlockNotes';
-import BlockModules from '../containers/BlockModules';
+// import BlockForm from './BlockForm';
+// import BlockNotes from '../containers/BlockNotes';
+// import BlockModules from '../containers/BlockModules';
+import Loading from './Loading';
+
+const AsyncBlockForm = Loadable({
+  loader: () => import(/* webpackChunkName: "BlockForm" */ './BlockForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './BlockForm')
+});
+
+const AsyncBlockNotes = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverNoteForm" */ '../containers/BlockNotes'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../containers/BlockNotes')
+});
+
+const AsyncBlockModules = Loadable({
+  loader: () => import(/* webpackChunkName: "BlockModules" */ '../containers/BlockModules'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../containers/BlockModules')
+});
 
 const onSubmit = (block, editBlock) => values => {
   editBlock(block.id, values.inv, values.isWork, values.zverId);
@@ -63,13 +87,13 @@ const BlockEditView = ({
         <h2>
           {t(`block.label.edit`)} {t('block.label.block')}
         </h2>
-        <BlockForm onSubmit={onSubmit(blockObj, editBlock)} block={block} zverId={zverId} />
+        <AsyncBlockForm onSubmit={onSubmit(blockObj, editBlock)} block={block} zverId={zverId} />
         <br />
         {blockObj && (
-          <BlockNotes blockId={Number(match.params.id)} notes={blockObj.notes} subscribeToMore={subscribeToMore} />
+          <AsyncBlockNotes blockId={Number(match.params.id)} notes={blockObj.notes} subscribeToMore={subscribeToMore} />
         )}
         {blockObj && (
-          <BlockModules
+          <AsyncBlockModules
             zverId={Number(zverId)}
             blockId={Number(match.params.id)}
             modules={blockObj.modules}

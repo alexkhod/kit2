@@ -1,10 +1,20 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 
 import translate from '../../../i18n';
-import UserForm from './UserForm';
+// import UserForm from './UserForm';
+import Loading from './Loading';
 import { withLoadedUser } from '../containers/Auth';
+
+const AsyncUserForm = Loadable({
+  loader: () => import(/* webpackChunkName: "UserForm" */ './UserForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './UserForm')
+});
 
 class UserAddView extends React.PureComponent {
   static propTypes = {
@@ -16,7 +26,7 @@ class UserAddView extends React.PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <UserForm
+        <AsyncUserForm
           onSubmit={this.props.onSubmit}
           initialValues={{}}
           shouldRoleDisplay={true}

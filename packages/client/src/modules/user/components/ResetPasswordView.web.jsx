@@ -1,12 +1,22 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
-import ResetPasswordForm from '../components/ResetPasswordForm';
+// import ResetPasswordForm from '../components/ResetPasswordForm';
+import Loading from './Loading';
 import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
+
+const AsyncResetPasswordForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ResetPasswordForm" */ '../components/ResetPasswordForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/ResetPasswordForm')
+});
 
 class ResetPasswordView extends React.Component {
   static propTypes = {
@@ -56,7 +66,7 @@ class ResetPasswordView extends React.Component {
       <PageLayoutN>
         {renderMetaData()}
         <h1>{t('resetPass.form.title')}</h1>
-        <ResetPasswordForm onSubmit={this.onSubmit(resetPassword)} />
+        <AsyncResetPasswordForm onSubmit={this.onSubmit(resetPassword)} />
       </PageLayoutN>
     );
   }

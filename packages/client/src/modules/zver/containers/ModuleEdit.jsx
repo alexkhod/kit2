@@ -1,11 +1,21 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import ModuleEditView from '../components/ModuleEditView';
+// import ModuleEditView from '../components/ModuleEditView';
+import Loading from '../components/Loading';
 
 import MODULE_QUERY from '../graphql/ModuleQuery.graphql';
 import EDIT_MODULE from '../graphql/EditModule.graphql';
 import MODULE_SUBSCRIPTION from '../graphql/ModuleSubscription.graphql';
+
+const AsyncModuleNotesView = Loadable({
+  loader: () => import(/* webpackChunkName: "ModuleEditView" */ '../components/ModuleEditView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/ModuleEditView')
+});
 
 class ModuleEdit extends React.Component {
   static propTypes = {
@@ -84,7 +94,11 @@ class ModuleEdit extends React.Component {
 
   render() {
     return (
-      <ModuleEditView {...this.props} zverId={this.props.match.params.zid} blockId={this.props.match.params.bid} />
+      <AsyncModuleNotesView
+        {...this.props}
+        zverId={this.props.match.params.zid}
+        blockId={this.props.match.params.bid}
+      />
     );
   }
 }

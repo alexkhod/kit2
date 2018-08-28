@@ -1,12 +1,22 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-import ZverBlockForm from './ZverBlockForm';
+// import ZverBlockForm from './ZverBlockForm';
+import Loading from './Loading';
 import { IfLoggedIn } from '../../user/containers/AuthBase';
+
+const AsyncZverBlockForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverBlockForm" */ './ZverBlockForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './ZverBlockForm')
+});
 
 class ZverBlocksView extends React.PureComponent {
   static propTypes = {
@@ -91,7 +101,7 @@ class ZverBlocksView extends React.PureComponent {
       <div>
         <h3>{t('blocks.title')}</h3>
         <IfLoggedIn role="admin">
-          <ZverBlockForm zverId={zverId} onSubmit={this.onSubmit()} initialValues={block} block={block} />
+          <AsyncZverBlockForm zverId={zverId} onSubmit={this.onSubmit()} initialValues={block} block={block} />
         </IfLoggedIn>
         <h1 />
         <Table dataSource={blocks} columns={columns} />

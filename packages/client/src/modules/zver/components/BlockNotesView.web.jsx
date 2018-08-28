@@ -1,10 +1,20 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-import BlockNoteForm from './BlockNoteForm';
+// import BlockNoteForm from './BlockNoteForm';
+import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
+
+const AsyncBlockNoteForm = Loadable({
+  loader: () => import(/* webpackChunkName: "BlockNoteForm" */ './BlockNoteForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './BlockNoteForm')
+});
 
 class BlockNotesView extends React.PureComponent {
   static propTypes = {
@@ -115,7 +125,7 @@ class BlockNotesView extends React.PureComponent {
       <div>
         <h3>{t('notes.title')}</h3>
         <IfLoggedIn>
-          <BlockNoteForm blockId={blockId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
+          <AsyncBlockNoteForm blockId={blockId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
         </IfLoggedIn>
         <h1 />
         <IfLoggedIn>

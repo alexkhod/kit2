@@ -1,10 +1,13 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-import ZverList from '../components/ZverList';
+// import ZverList from '../components/ZverList';
+import Loading from '../components/Loading';
 
 import ZVERS_QUERY from '../graphql/ZversQuery.graphql';
 import ZVERS_SUBSCRIPTION from '../graphql/ZversSubscription.graphql';
@@ -12,6 +15,13 @@ import DELETE_ZVER from '../graphql/DeleteZver.graphql';
 
 import paginationConfig from '../../../../../../config/pagination';
 import { PLATFORM } from '../../../../../common/utils';
+
+const AsyncZverList = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverList" */ '../components/ZverList'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/ZverList')
+});
 
 const limit =
   PLATFORM === 'web' || PLATFORM === 'server' ? paginationConfig.web.itemsNumber : paginationConfig.mobile.itemsNumber;
@@ -127,7 +137,7 @@ class Zver extends React.Component {
   };
 
   render() {
-    return <ZverList {...this.props} />;
+    return <AsyncZverList {...this.props} />;
   }
 }
 

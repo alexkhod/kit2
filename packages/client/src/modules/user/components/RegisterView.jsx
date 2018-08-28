@@ -1,9 +1,19 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-import RegisterForm from '../components/RegisterForm';
+// import RegisterForm from '../components/RegisterForm';
+import Loading from './Loading';
 import translate from '../../../i18n';
+
+const AsyncRegisterForm = Loadable({
+  loader: () => import(/* webpackChunkName: "RegisterForm" */ '../components/RegisterForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/RegisterForm')
+});
 
 class RegisterView extends React.PureComponent {
   static propTypes = {
@@ -29,7 +39,7 @@ class RegisterView extends React.PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <RegisterForm onSubmit={this.onSubmit} />
+        <AsyncRegisterForm onSubmit={this.onSubmit} />
       </View>
     );
   }

@@ -1,13 +1,23 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { PageLayoutN } from '../../common/components/web';
-import ZverForm from './ZverForm';
+// import ZverForm from './ZverForm';
+import Loading from './Loading';
 
 // import settings from '../../../../../../settings';
+
+const AsyncZverForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverForm" */ './ZverForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './ZverForm')
+});
 
 const onSubmit = addZver => values => {
   addZver(values.inv, values.isWork);
@@ -34,7 +44,7 @@ const ZverAddView = ({ addZver, t }) => {
       <h2>
         {t(`zver.label.create`)} {t('zver.label.zver')}
       </h2>
-      <ZverForm onSubmit={onSubmit(addZver)} />
+      <AsyncZverForm onSubmit={onSubmit(addZver)} />
       <br />
     </PageLayoutN>
   );

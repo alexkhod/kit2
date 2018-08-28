@@ -1,13 +1,23 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
-import ForgotPasswordForm from '../components/ForgotPasswordForm';
+// import ForgotPasswordForm from '../components/ForgotPasswordForm';
+import Loading from './Loading';
 import { LayoutCenter } from '../../common/components';
 import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
+
+const AsyncForgotPasswordForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ForgotPasswordForm" */ '../components/ForgotPasswordForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/ForgotPasswordForm')
+});
 
 class ForgotPasswordView extends React.Component {
   static propTypes = {
@@ -54,7 +64,7 @@ class ForgotPasswordView extends React.Component {
         {renderMetaData()}
         <LayoutCenter>
           <h1 className="text-center">{t('forgotPass.form.title')}</h1>
-          <ForgotPasswordForm onSubmit={this.onSubmit({ forgotPassword, t })} sent={this.state.sent} />
+          <AsyncForgotPasswordForm onSubmit={this.onSubmit({ forgotPassword, t })} sent={this.state.sent} />
         </LayoutCenter>
       </PageLayoutN>
     );

@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
@@ -6,8 +8,16 @@ import translate from '../../../i18n';
 import { LayoutCenter } from '../../common/components';
 import { PageLayoutN, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
 
-import LoginForm from './LoginForm';
+// import LoginForm from './LoginForm';
+import Loading from './Loading';
 import settings from '../../../../../../settings';
+
+const AsyncLoginForm = Loadable({
+  loader: () => import(/* webpackChunkName: "LoginForm" */ './LoginForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './LoginForm')
+});
 
 class LoginView extends React.PureComponent {
   static propTypes = {
@@ -52,7 +62,7 @@ class LoginView extends React.PureComponent {
         {renderMetaData()}
         <LayoutCenter>
           <h1 className="text-center">{t('login.form.title')}</h1>
-          <LoginForm onSubmit={this.onSubmit(login)} />
+          <AsyncLoginForm onSubmit={this.onSubmit(login)} />
           <hr />
           <Card>
             <CardGroup>

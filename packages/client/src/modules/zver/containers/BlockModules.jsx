@@ -1,9 +1,12 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-import BlockModulesView from '../components/BlockModulesView';
+// import BlockModulesView from '../components/BlockModulesView';
+import Loading from '../components/Loading';
 
 import ADD_MODULE from '../graphql/AddModuleOnBlock.graphql';
 import EDIT_MODULE from '../graphql/EditModule.graphql';
@@ -11,6 +14,13 @@ import DELETE_MODULE from '../graphql/DeleteModule.graphql';
 import MODULE_SUBSCRIPTION from '../graphql/ModuleSubscription.graphql';
 import ADD_MODULE_CLIENT from '../graphql/AddModule.client.graphql';
 import MODULE_QUERY_CLIENT from '../graphql/ModuleQuery.client.graphql';
+
+const AsyncBlockModulesView = Loadable({
+  loader: () => import(/* webpackChunkName: "BlockModulesView" */ '../components/BlockModulesView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/BlockModulesView')
+});
 
 function AddModule(prev, node) {
   // ignore if duplicate
@@ -122,7 +132,7 @@ class BlockModules extends React.Component {
   };
 
   render() {
-    return <BlockModulesView {...this.props} />;
+    return <AsyncBlockModulesView {...this.props} />;
   }
 }
 

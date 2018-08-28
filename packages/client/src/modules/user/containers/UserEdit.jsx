@@ -1,13 +1,23 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import { compose, graphql } from 'react-apollo';
 import { pick } from 'lodash';
 
-import UserEditView from '../components/UserEditView';
+// import UserEditView from '../components/UserEditView';
+import Loading from '../components/Loading';
 
 import USER_QUERY from '../graphql/UserQuery.graphql';
 import EDIT_USER from '../graphql/EditUser.graphql';
 import settings from '../../../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
+
+const AsyncUserEditView = Loadable({
+  loader: () => import(/* webpackChunkName: "UserEditView" */ '../components/UserEditView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/UserEditView')
+});
 
 class UserEdit extends React.Component {
   onSubmit = async values => {
@@ -37,7 +47,7 @@ class UserEdit extends React.Component {
   };
 
   render() {
-    return <UserEditView onSubmit={this.onSubmit} {...this.props} />;
+    return <AsyncUserEditView onSubmit={this.onSubmit} {...this.props} />;
   }
 }
 

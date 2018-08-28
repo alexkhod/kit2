@@ -1,11 +1,21 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import { compose, graphql } from 'react-apollo';
 import { pick } from 'lodash';
 
-import UserAddView from '../components/UserAddView';
+// import UserAddView from '../components/UserAddView';
+import Loading from '../components/Loading';
 import ADD_USER from '../graphql/AddUser.graphql';
 import settings from '../../../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
+
+const AsyncUserAddView = Loadable({
+  loader: () => import(/* webpackChunkName: "UserAddView" */ '../components/UserAddView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/UserAddView')
+});
 
 class UserAdd extends React.Component {
   constructor(props) {
@@ -39,7 +49,7 @@ class UserAdd extends React.Component {
   };
 
   render() {
-    return <UserAddView onSubmit={this.onSubmit} {...this.props} />;
+    return <AsyncUserAddView onSubmit={this.onSubmit} {...this.props} />;
   }
 }
 

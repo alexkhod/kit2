@@ -1,12 +1,22 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { PageLayoutN } from '../../common/components/web';
 
-import UserForm from './UserForm';
+// import UserForm from './UserForm';
+import Loading from './Loading';
 import settings from '../../../../../../settings';
 import translate from '../../../i18n';
+
+const AsyncUserForm = Loadable({
+  loader: () => import(/* webpackChunkName: "UserForm" */ './UserForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './UserForm')
+});
 
 class UserAddView extends React.PureComponent {
   static propTypes = {
@@ -55,7 +65,7 @@ class UserAddView extends React.PureComponent {
         <h2>
           {t('userEdit.form.titleCreate')} {t('userEdit.form.title')}
         </h2>
-        <UserForm
+        <AsyncUserForm
           onSubmit={this.props.onSubmit}
           initialValues={{}}
           shouldRoleDisplay={true}

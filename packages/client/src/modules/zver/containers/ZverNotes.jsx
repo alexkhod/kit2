@@ -1,9 +1,12 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-import ZverNotesView from '../components/ZverNotesView';
+// import ZverNotesView from '../components/ZverNotesView';
+import Loading from '../components/Loading';
 
 import ADD_NOTE_ON_ZVER from '../graphql/AddNoteOnZver.graphql';
 import EDIT_NOTE from '../graphql/EditNote.graphql';
@@ -11,6 +14,13 @@ import DELETE_NOTE from '../graphql/DeleteNote.graphql';
 import NOTE_SUBSCRIPTION from '../graphql/NoteSubscription.graphql';
 import ADD_NOTE_CLIENT from '../graphql/AddNote.client.graphql';
 import NOTE_QUERY_CLIENT from '../graphql/NoteQuery.client.graphql';
+
+const AsyncZverNotesView = Loadable({
+  loader: () => import(/* webpackChunkName: "ZverNotesView" */ '../components/ZverNotesView'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/ZverNotesView')
+});
 
 function AddNote(prev, node) {
   // ignore if duplicate
@@ -119,8 +129,7 @@ class ZverNotes extends React.Component {
   };
 
   render() {
-    //console.log(note);
-    return <ZverNotesView {...this.props} />;
+    return <AsyncZverNotesView {...this.props} />;
   }
 }
 

@@ -1,10 +1,13 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 
-import UsersList from '../components/UsersListView';
-import UsersFilter from '../components/UsersFilterView';
+// import UsersList from '../components/UsersListView';
+// import UsersFilter from '../components/UsersFilterView';
+import Loading from '../components/Loading';
 import withSubscription from './withSubscription';
 import {
   updateUsersState,
@@ -14,6 +17,20 @@ import {
   withUsersDeleting,
   withUsersState
 } from './UserOperations';
+
+const AsyncUsersList = Loadable({
+  loader: () => import(/* webpackChunkName: "UsersList" */ '../components/UsersList'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/UsersList')
+});
+
+const AsyncUsersFilter = Loadable({
+  loader: () => import(/* webpackChunkName: "UsersFilter" */ '../components/UsersFilter'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, '../components/UsersFilter')
+});
 
 class Users extends React.Component {
   constructor(props) {
@@ -33,11 +50,11 @@ class Users extends React.Component {
       <View style={styles.container}>
         {isOpenFilter && (
           <View style={styles.filterContainer}>
-            <UsersFilter {...this.props} />
+            <AsyncUsersFilter {...this.props} />
           </View>
         )}
         <View style={styles.usersListContainer}>
-          <UsersList {...this.props} />
+          <AsyncUsersList {...this.props} />
         </View>
       </View>
     );

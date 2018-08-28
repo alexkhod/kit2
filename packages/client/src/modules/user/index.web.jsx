@@ -1,4 +1,6 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import { CookiesProvider } from 'react-cookie';
 import { NavLink, withRouter } from 'react-router-dom';
 
@@ -12,13 +14,21 @@ import Users from './containers/Users';
 import UserEdit from './containers/UserEdit';
 import UserAdd from './containers/UserAdd';
 import Register from './containers/Register';
-import Login from './containers/Login';
+// import Login from './containers/Login';
+import Loading from './components/Loading';
 import ForgotPassword from './containers/ForgotPassword';
 import ResetPassword from './containers/ResetPassword';
 
 import { AuthRoute, IfLoggedIn, IfNotLoggedIn, withLoadedUser, withLogout } from './containers/Auth';
 
 import Feature from '../connector';
+
+const AsyncLogin = Loadable({
+  loader: () => import(/* webpackChunkName: "Login" */ './containers/Login'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './containers/Login')
+});
 
 const ProfileName = withLoadedUser(
   ({ currentUser }) => (currentUser ? currentUser.fullName || currentUser.username : null)
@@ -68,7 +78,7 @@ export default new Feature(access, {
       redirectOnLoggedIn
       redirect="/"
       component={withRouter(({ history }) => (
-        <Login onLogin={() => history.push('/profile')} />
+        <AsyncLogin onLogin={() => history.push('/profile')} />
       ))}
     />,
     <AuthRoute exact path="/forgot-password" redirectOnLoggedIn redirect="/profile" component={ForgotPassword} />,

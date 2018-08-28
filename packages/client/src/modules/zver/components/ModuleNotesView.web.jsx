@@ -1,10 +1,20 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-import ModuleNoteForm from './ModuleNoteForm';
+// import ModuleNoteForm from './ModuleNoteForm';
+import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
+
+const AsyncModuleNoteForm = Loadable({
+  loader: () => import(/* webpackChunkName: "ModuleNoteForm" */ './ModuleNoteForm'),
+  loading: Loading,
+  delay: 300,
+  serverSideRequirePath: path.join(__dirname, './ModuleNoteForm')
+});
 
 class ModuleNotesView extends React.PureComponent {
   static propTypes = {
@@ -115,7 +125,7 @@ class ModuleNotesView extends React.PureComponent {
       <div>
         <h3>{t('notes.title')}</h3>
         <IfLoggedIn>
-          <ModuleNoteForm moduleId={moduleId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
+          <AsyncModuleNoteForm moduleId={moduleId} onSubmit={this.onSubmit()} initialValues={note} note={note} />
         </IfLoggedIn>
         <h1 />
         <IfLoggedIn>
