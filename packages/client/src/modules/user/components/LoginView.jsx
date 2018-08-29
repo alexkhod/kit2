@@ -2,11 +2,11 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import path from 'path';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, Linking, Platform } from 'react-native';
+import { StyleSheet, View, Linking, Platform } from 'react-native'; //import { StyleSheet, View, Text, Linking, Platform } from 'react-native';
 import { WebBrowser } from 'expo';
 import { placeholderColor } from '../../common/components/native/styles';
 
-import settings from '../../../../../../settings';
+// import settings from '../../../../../../settings';
 import translate from '../../../i18n';
 
 // import LoginForm from './LoginForm';
@@ -67,20 +67,10 @@ class LoginView extends React.PureComponent {
     }
   };
 
-  renderAvailableLogins = () => (
-    <View style={styles.examplesArea}>
-      <Text style={styles.title}>{this.props.t('login.cardTitle')}:</Text>
-      <Text style={styles.exampleText}>admin@example.com: admin123</Text>
-      <Text style={styles.exampleText}>user@example.com: user1234</Text>
-      {settings.subscription.enabled && <Text style={styles.exampleText}>subscriber@example.com: subscriber</Text>}
-    </View>
-  );
-
   render() {
     const { login, navigation } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.examplesContainer}>{this.renderAvailableLogins()}</View>
         <View style={styles.loginContainer}>
           <AsyncLoginForm onSubmit={this.onSubmit(login)} navigation={navigation} />
         </View>

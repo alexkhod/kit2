@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
 import { LayoutCenter } from '../../common/components';
-import { PageLayoutN, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
+import { PageLayoutN } from '../../common/components/web'; //import { PageLayoutN, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
 
 // import LoginForm from './LoginForm';
 import Loading from './Loading';
@@ -63,15 +63,6 @@ class LoginView extends React.PureComponent {
         <LayoutCenter>
           <h1 className="text-center">{t('login.form.title')}</h1>
           <AsyncLoginForm onSubmit={this.onSubmit(login)} />
-          <hr />
-          <Card>
-            <CardGroup>
-              <CardTitle>{t('login.cardTitle')}:</CardTitle>
-              <CardText>admin@example.com:admin123</CardText>
-              <CardText>user@example.com:user1234</CardText>
-              {settings.subscription.enabled && <CardText>subscriber@example.com:subscriber</CardText>}
-            </CardGroup>
-          </Card>
         </LayoutCenter>
       </PageLayoutN>
     );

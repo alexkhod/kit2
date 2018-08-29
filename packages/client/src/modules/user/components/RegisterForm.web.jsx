@@ -19,14 +19,8 @@ const registerFormSchema = {
 };
 
 const validate = values => validateForm(values, registerFormSchema);
-//let cap = '';
-// const verifyCallback = response => (cap = response);
-//
-//const RECAPTCHA_SITE_KEY = '6LeqQmEUAAAAANGD7o5pEkzVmi-W0LAG4OYnaBe-';
-//const RECAPTCHA_SITE_KEY = settings.user.recaptchasitekey;
 
 const RegisterForm = ({ values, setFieldValue, errors, touched, handleSubmit, submitting, error, t }) => {
-  //console.log(values);
   return (
     <Form name="register" onSubmit={handleSubmit}>
       <Field
