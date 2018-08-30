@@ -33,6 +33,12 @@ const config = {
       __API_URL__: '"/graphql"'
     },
     webpackConfig: {
+      resolve: {
+        "alias": {
+          "react": "preact-compat",
+          "react-dom": "preact-compat"
+        }
+      },
       devServer: {
         disableHostCheck: true
       }

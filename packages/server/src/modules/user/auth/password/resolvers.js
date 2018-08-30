@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import jwt from 'jsonwebtoken';
 import fetch from 'isomorphic-fetch';
 

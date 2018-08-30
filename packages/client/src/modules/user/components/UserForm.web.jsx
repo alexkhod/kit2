@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
-import { isEmpty } from 'lodash';
+// import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 import translate from '../../../i18n';
 import Field from '../../../utils/FieldAdapter';

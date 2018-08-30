@@ -1,5 +1,6 @@
 /*eslint-disable no-unused-vars*/
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import Stripe from 'stripe';
 
 import FieldError from '../../../../common/FieldError';

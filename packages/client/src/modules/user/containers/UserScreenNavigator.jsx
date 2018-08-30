@@ -1,7 +1,8 @@
 import { createDrawerNavigator } from 'react-navigation';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pickBy } from 'lodash';
+// import { pickBy } from 'lodash';
+import pickBy from 'lodash/pickBy';
 import { compose } from 'react-apollo';
 import { withUser } from './Auth';
 import { DrawerComponent } from '../../common/components/native';

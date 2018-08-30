@@ -1,6 +1,7 @@
 import BaseConnector, { BaseFeature, combine } from './BaseConnector';
 
-import { merge } from 'lodash';
+// import { merge } from 'lodash';
+import merge from 'lodash/merge';
 
 interface FeatureShape extends BaseFeature {
   drawerItem?: any | any[];

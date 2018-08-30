@@ -1,4 +1,5 @@
-import { groupBy } from 'lodash';
+// import { groupBy } from 'lodash';
+import groupBy from 'lodash/groupBy';
 import settings from '../../../../settings';
 
 export const returnId = knexTable => (settings.db.dbType === 'sqlite' ? knexTable : knexTable.returning('id'));

@@ -1,5 +1,6 @@
 /*eslint-disable no-unused-vars*/
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import jwt from 'jsonwebtoken';
 import withAuth from 'graphql-auth';
 import { withFilter } from 'graphql-subscriptions';

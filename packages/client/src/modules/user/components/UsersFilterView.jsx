@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { FontAwesome } from '@expo/vector-icons';
 import {
   Select,

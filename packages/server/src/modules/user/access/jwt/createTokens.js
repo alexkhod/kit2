@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 
 import settings from '../../../../../../../settings';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { hydrate, render } from 'react-dom';
+import { render } from 'react-dom';
 
 // Virtual module, generated in-memory by spinjs, contains count of backend rebuilds
 // tslint:disable-next-line
@@ -8,7 +8,7 @@ import 'backend_reload';
 import log from '../../common/log';
 import Main from './app/Main';
 
-const renderFunc = __SSR__ ? hydrate : render;
+const renderFunc = render;
 const root = document.getElementById('root');
 
 let frontendReloadCount = 0;

@@ -70,6 +70,8 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "minilog": "^3.1.0",
+    "preact": "^8.3.1",
+    "preact-compat": "^3.18.3",
     "prop-types": "^15.6.0",
     "react": "16.3.1",
     "react-apollo": "^2.1.4",

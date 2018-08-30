@@ -1,4 +1,5 @@
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import passport from 'passport';
 import FacebookStrategy from 'passport-facebook';
 

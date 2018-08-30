@@ -1,10 +1,12 @@
-import _ from 'lodash';
+// import _ from 'lodash';
+import pickBy from 'lodash/pickBy';
+import get from 'lodash/get';
 import * as modules from './config';
 
 const envSettings = Object.assign(
   {},
-  _.pickBy(modules, (v, k) => k !== 'env'),
-  _.get(modules, 'env.' + process.env.NODE_ENV)
+  pickBy(modules, (v, k) => k !== 'env'),
+  get(modules, 'env.' + process.env.NODE_ENV)
 );
 
 export default envSettings;

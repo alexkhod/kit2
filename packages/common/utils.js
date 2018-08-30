@@ -1,10 +1,12 @@
-import _ from 'lodash';
+// import _ from 'lodash';
+import omit from 'lodash/omit';
+import each from 'lodash/each';
 import log from './log';
 
 export const nestedOmit = (obj, iteratee, context) => {
-  let r = _.omit(obj, iteratee, context);
+  let r = omit(obj, iteratee, context);
 
-  _.each(r, function(val, key) {
+  each(r, function(val, key) {
     if (typeof val === 'object') r[key] = nestedOmit(val, iteratee, context);
   });
 

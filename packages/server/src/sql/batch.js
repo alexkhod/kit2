@@ -1,5 +1,8 @@
 /*eslint-disable no-unused-vars*/
-import _ from 'lodash';
+// import _ from 'lodash';
+import find from 'lodash/find';
+import uniqBy from 'lodash/uniqBy';
+import intersectionWith from 'lodash/intersectionWith';
 
 export const reconcileBatchOneToOne = (sources, results, matchField) => {
   let ret = [];
@@ -22,7 +25,7 @@ export const reconcileBatchOneToMany = (sources, results, matchField) => {
   for (let src of sources) {
     // search cache
     // find the match
-    let match = _.find(results, elem => elem.length > 0 && elem[0][matchField] === src[matchField]);
+    let match = find(results, elem => elem.length > 0 && elem[0][matchField] === src[matchField]);
 
     let r = match;
 
@@ -51,7 +54,7 @@ export const reconcileBatchManyToMany = (
   let ret = [];
   for (let src of sources) {
     // find the sources match
-    const match = _.find(
+    const match = find(
       matches,
       elem =>
         elem.length > 0 &&
@@ -60,10 +63,10 @@ export const reconcileBatchManyToMany = (
     );
 
     // Make the matched entries unique
-    const unique = _.uniqBy(match, resultsField);
+    const unique = uniqBy(match, resultsField);
 
     // Pull the results
-    let r = _.intersectionWith(results, unique, (lhs, rhs) => lhs[resultsField] === rhs[resultsField]);
+    let r = intersectionWith(results, unique, (lhs, rhs) => lhs[resultsField] === rhs[resultsField]);
     for (let elem of r) {
       elem[sourcesField] = src[sourcesField];
     }

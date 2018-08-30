@@ -1,4 +1,7 @@
-import _ from 'lodash';
+// import _ from 'lodash';
+import filter from 'lodash/filter';
+import uniq from 'lodash/uniq';
+import map from 'lodash/map';
 import uuidv4 from 'uuid';
 import { camelize, decamelizeKeys, camelizeKeys } from 'humps';
 
@@ -321,9 +324,9 @@ export function getManyRelationAdapter(options) {
   return async function(args, trx) {
     try {
       let ret = await selector(args, trx);
-      ret = _.filter(ret, r => r[options.elemField] !== null);
+      ret = filter(ret, r => r[options.elemField] !== null);
       if (!args.ids) {
-        args.ids = _.uniq(_.map(ret, r => r[options.collectionField]));
+        args.ids = uniq(map(ret, r => r[options.collectionField]));
       }
       ret = camelizeKeys(ret);
       ret = orderedFor(ret, args.ids, camelize(options.collectionField), false);

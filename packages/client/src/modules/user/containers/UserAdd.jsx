@@ -1,7 +1,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import { compose, graphql } from 'react-apollo';
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 
 import Loading from '../components/Loading';
 import ADD_USER from '../graphql/AddUser.graphql';

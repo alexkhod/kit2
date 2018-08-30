@@ -1,4 +1,5 @@
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import passport from 'passport';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 

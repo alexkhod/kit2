@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai';
 import { step } from 'mocha-steps';
-import _ from 'lodash';
+// import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 
 import Renderer from '../../../testHelpers/Renderer';
 import { wait, find, findAll, updateContent, click, change, submit } from '../../../testHelpers/testUtils';
@@ -126,7 +127,7 @@ describe('Posts and comments example UI works', () => {
   step('Updates post list on post create from subscription', () => {
     const subscription = renderer.getSubscriptions(POSTS_SUBSCRIPTION)[0];
     subscription.next(
-      _.cloneDeep({
+      cloneDeep({
         data: {
           postsUpdated: {
             mutation: 'CREATED',

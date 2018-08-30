@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { merge, map, union, without, castArray } from 'lodash';
+// import { merge, map, union, without, castArray } from 'lodash';
+import merge from 'lodash/merge';
+import map from 'lodash/map';
+import union from 'lodash/union';
+import without from 'lodash/without';
+import castArray from 'lodash/castArray';
 
 export interface BaseFeature {
   localization?: any | any[];
