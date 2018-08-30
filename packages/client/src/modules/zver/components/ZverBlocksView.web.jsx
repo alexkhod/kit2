@@ -1,21 +1,18 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-// import ZverBlockForm from './ZverBlockForm';
 import Loading from './Loading';
 import { IfLoggedIn } from '../../user/containers/AuthBase';
 
 const AsyncZverBlockForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverBlockForm" */ './ZverBlockForm'),
+  loader: () => import('./ZverBlockForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ZverBlockForm')
+  delay: 300
 });
 
 class ZverBlocksView extends React.PureComponent {

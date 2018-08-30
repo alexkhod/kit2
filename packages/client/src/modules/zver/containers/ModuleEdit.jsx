@@ -1,9 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-// import ModuleEditView from '../components/ModuleEditView';
 import Loading from '../components/Loading';
 
 import MODULE_QUERY from '../graphql/ModuleQuery.graphql';
@@ -11,10 +9,9 @@ import EDIT_MODULE from '../graphql/EditModule.graphql';
 import MODULE_SUBSCRIPTION from '../graphql/ModuleSubscription.graphql';
 
 const AsyncModuleNotesView = Loadable({
-  loader: () => import(/* webpackChunkName: "ModuleEditView" */ '../components/ModuleEditView'),
+  loader: () => import('../components/ModuleEditView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ModuleEditView')
+  delay: 300
 });
 
 class ModuleEdit extends React.Component {

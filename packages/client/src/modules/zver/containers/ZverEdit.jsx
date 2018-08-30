@@ -1,20 +1,17 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import Loading from '../components/Loading';
-// import ZverEditView from '../components/ZverEditView';
 
 import ZVER_QUERY from '../graphql/ZverQuery.graphql';
 import EDIT_ZVER from '../graphql/EditZver.graphql';
 import ZVER_SUBSCRIPTION from '../graphql/ZverSubscription.graphql';
 
 const AsyncZverEditView = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverEditView" */ '../components/ZverEditView'),
+  loader: () => import('../components/ZverEditView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ZverEditView')
+  delay: 300
 });
 
 class ZverEdit extends React.Component {

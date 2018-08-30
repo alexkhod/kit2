@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
@@ -8,15 +7,13 @@ import translate from '../../../i18n';
 import { LayoutCenter } from '../../common/components';
 import { PageLayoutN } from '../../common/components/web'; //import { PageLayoutN, Card, CardGroup, CardTitle, CardText } from '../../common/components/web';
 
-// import LoginForm from './LoginForm';
 import Loading from './Loading';
 import settings from '../../../../../../settings';
 
 const AsyncLoginForm = Loadable({
-  loader: () => import(/* webpackChunkName: "LoginForm" */ './LoginForm'),
+  loader: () => import('./LoginForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './LoginForm')
+  delay: 300
 });
 
 class LoginView extends React.PureComponent {

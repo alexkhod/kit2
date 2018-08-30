@@ -1,18 +1,15 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { graphql, compose } from 'react-apollo';
 
-// import ForgotPasswordView from '../components/ForgotPasswordView';
 import Loading from '../components/Loading';
 
 import FORGOT_PASSWORD from '../graphql/ForgotPassword.graphql';
 
 const AsyncForgotPasswordView = Loadable({
-  loader: () => import(/* webpackChunkName: "ForgotPasswordView" */ '../components/ForgotPasswordView'),
+  loader: () => import('../components/ForgotPasswordView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ForgotPasswordView')
+  delay: 300
 });
 
 class ForgotPassword extends React.Component {

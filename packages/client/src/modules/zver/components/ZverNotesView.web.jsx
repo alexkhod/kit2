@@ -1,19 +1,16 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-// import ZverNoteForm from './ZverNoteForm';
 import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
 
 const AsyncZverNoteForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverNoteForm" */ './ZverNoteForm'),
+  loader: () => import('./ZverNoteForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ZverNoteForm')
+  delay: 300
 });
 
 class ZverNotesView extends React.PureComponent {

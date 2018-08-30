@@ -1,20 +1,17 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { compose, graphql } from 'react-apollo';
 import { pick } from 'lodash';
 
-// import UserAddView from '../components/UserAddView';
 import Loading from '../components/Loading';
 import ADD_USER from '../graphql/AddUser.graphql';
 import settings from '../../../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
 
 const AsyncUserAddView = Loadable({
-  loader: () => import(/* webpackChunkName: "UserAddView" */ '../components/UserAddView'),
+  loader: () => import('../components/UserAddView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UserAddView')
+  delay: 300
 });
 
 class UserAdd extends React.Component {

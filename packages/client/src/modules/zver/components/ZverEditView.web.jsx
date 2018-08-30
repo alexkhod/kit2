@@ -1,41 +1,32 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import Loading from './Loading';
 
 import translate from '../../../i18n';
 import { PageLayoutN } from '../../common/components/web';
-// import ZverForm from './ZverForm';
-// import ZverNotes from '../containers/ZverNotes';
-// import ZverBlocks from '../containers/ZverBlocks';
-// import { IfLoggedIn } from '../../user/containers/AuthBase';
-// import settings from '../../../../../../settings';
 
 const onSubmit = (zver, editZver) => values => {
   editZver(zver.id, values.inv, values.isWork);
 };
 
 const AsyncZverForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverForm" */ './ZverForm'),
+  loader: () => import('./ZverForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ZverForm')
+  delay: 300
 });
 
 const AsyncZverNotes = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverNotes" */ '../containers/ZverNotes'),
+  loader: () => import('../containers/ZverNotes'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../containers/ZverNotes')
+  delay: 300
 });
 
 const AsyncZverBlocks = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverBlocks" */ '../containers/ZverBlocks'),
+  loader: () => import('../containers/ZverBlocks'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../containers/ZverBlocks')
+  delay: 300
 });
 
 const ZverEditView = ({ loading, zver, match, location, subscribeToMore, editZver, t, history, navigation }) => {

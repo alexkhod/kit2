@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -11,39 +10,31 @@ import Field from '../../../utils/FieldAdapter';
 import { RenderField, Button, primary, FormView } from '../../common/components/native';
 import { placeholderColor, submit } from '../../common/components/native/styles';
 import { required, minLength, validateForm } from '../../../../../common/validation';
-// import FacebookButton from '../auth/facebook';
-// import GoogleButton from '../auth/google';
-// import GitHubButton from '../auth/github';
-// import LinkedInButton from '../auth/linkedin';
 import Loading from './Loading';
 import settings from '../../../../../../settings';
 
 const AsyncFacebookButton = Loadable({
-  loader: () => import(/* webpackChunkName: "FacebookButton" */ '../auth/facebook'),
+  loader: () => import('../auth/facebook'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../auth/facebook')
+  delay: 300
 });
 
 const AsyncGoogleButton = Loadable({
-  loader: () => import(/* webpackChunkName: "GoogleButton" */ '../auth/google'),
+  loader: () => import('../auth/google'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../auth/google')
+  delay: 300
 });
 
 const AsyncGitHubButton = Loadable({
-  loader: () => import(/* webpackChunkName: "GitHubButton" */ '../auth/github'),
+  loader: () => import('../auth/github'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../auth/github')
+  delay: 300
 });
 
 const AsyncLinkedInButton = Loadable({
-  loader: () => import(/* webpackChunkName: "LinkedInButton" */ '../auth/linkedin'),
+  loader: () => import('../auth/linkedin'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../auth/linkedin')
+  delay: 300
 });
 
 const loginFormSchema = {

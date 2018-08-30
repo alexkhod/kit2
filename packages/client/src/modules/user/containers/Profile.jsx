@@ -1,22 +1,19 @@
 // React
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 
 // Apollo
 import { graphql, compose } from 'react-apollo';
 
 // Components
-// import ProfileView from '../components/ProfileView';
 import Loading from '../components/Loading';
 
 import CURRENT_USER_QUERY from '../graphql/CurrentUserQuery.graphql';
 
 const AsyncProfileView = Loadable({
-  loader: () => import(/* webpackChunkName: "ProfileView" */ '../components/ProfileView'),
+  loader: () => import('../components/ProfileView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ProfileView')
+  delay: 300
 });
 
 class Profile extends React.Component {

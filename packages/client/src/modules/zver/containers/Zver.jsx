@@ -1,12 +1,10 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-// import ZverList from '../components/ZverList';
 import Loading from '../components/Loading';
 
 import ZVERS_QUERY from '../graphql/ZversQuery.graphql';
@@ -17,10 +15,9 @@ import paginationConfig from '../../../../../../config/pagination';
 import { PLATFORM } from '../../../../../common/utils';
 
 const AsyncZverList = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverList" */ '../components/ZverList'),
+  loader: () => import('../components/ZverList'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ZverList')
+  delay: 300
 });
 
 const limit =

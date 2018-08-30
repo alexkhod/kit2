@@ -1,11 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-// import ZverBlocksView from '../components/ZverBlocksView';
 import Loading from '../components/Loading';
 
 import ADD_BLOCK from '../graphql/AddBlockOnZver.graphql';
@@ -16,10 +14,9 @@ import ADD_BLOCK_CLIENT from '../graphql/AddBlock.client.graphql';
 import BLOCK_QUERY_CLIENT from '../graphql/BlockQuery.client.graphql';
 
 const AsyncZverBlocksView = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverBlocksView" */ '../components/ZverBlocksView'),
+  loader: () => import('../components/ZverBlocksView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ZverBlocksView')
+  delay: 300
 });
 
 function AddBlock(prev, node) {

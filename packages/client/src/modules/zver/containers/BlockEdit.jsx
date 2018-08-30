@@ -1,9 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-// import BlockEditView from '../components/BlockEditView';
 import Loading from '../components/Loading';
 
 import BLOCK_QUERY from '../graphql/BlockQuery.graphql';
@@ -11,10 +9,9 @@ import EDIT_BLOCK from '../graphql/EditBlock.graphql';
 import BLOCK_SUBSCRIPTION from '../graphql/BlockSubscription.graphql';
 
 const AsyncBlockEditView = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockEditView" */ '../components/BlockEditView'),
+  loader: () => import('../components/BlockEditView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/BlockEditView')
+  delay: 300
 });
 
 class BlockEdit extends React.Component {

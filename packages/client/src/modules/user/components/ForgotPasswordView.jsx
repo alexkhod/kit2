@@ -1,18 +1,15 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 
-// import ForgotPasswordForm from './ForgotPasswordForm';
 import Loading from './Loading';
 import translate from '../../../i18n';
 
 const AsyncForgotPasswordForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ForgotPasswordForm" */ './ForgotPasswordForm'),
+  loader: () => import('./ForgotPasswordForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ForgotPasswordForm')
+  delay: 300
 });
 
 class ForgotPasswordView extends React.Component {

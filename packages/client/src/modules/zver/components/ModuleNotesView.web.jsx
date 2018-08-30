@@ -1,19 +1,16 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-// import ModuleNoteForm from './ModuleNoteForm';
 import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
 
 const AsyncModuleNoteForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ModuleNoteForm" */ './ModuleNoteForm'),
+  loader: () => import('./ModuleNoteForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ModuleNoteForm')
+  delay: 300
 });
 
 class ModuleNotesView extends React.PureComponent {

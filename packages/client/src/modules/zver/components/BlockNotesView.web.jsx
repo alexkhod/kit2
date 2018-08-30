@@ -1,19 +1,16 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-// import BlockNoteForm from './BlockNoteForm';
 import Loading from './Loading';
 import { IfLoggedIn, IfNotLoggedIn } from '../../user/containers/AuthBase';
 
 const AsyncBlockNoteForm = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockNoteForm" */ './BlockNoteForm'),
+  loader: () => import('./BlockNoteForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './BlockNoteForm')
+  delay: 300
 });
 
 class BlockNotesView extends React.PureComponent {

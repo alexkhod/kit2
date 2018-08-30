@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -8,9 +7,7 @@ import { compose } from 'react-apollo';
 
 import settings from '../../../../../../settings';
 import translate from '../../../i18n';
-// import UsersFilterView from '../components/UsersFilterView';
 import { Button, PageLayoutN } from '../../common/components/web';
-// import UsersListView from '../components/UsersListView';
 import Loading from '../components/Loading';
 import withSubscription from './withSubscription';
 import {
@@ -23,17 +20,15 @@ import {
 } from './UserOperations';
 
 const AsyncUsersFilterView = Loadable({
-  loader: () => import(/* webpackChunkName: "UsersFilterView" */ '../components/UsersFilterView'),
+  loader: () => import('../components/UsersFilterView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UsersFilterView')
+  delay: 300
 });
 
 const AsyncUsersListView = Loadable({
-  loader: () => import(/* webpackChunkName: "UsersListView" */ '../components/UsersListView'),
+  loader: () => import('../components/UsersListView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UsersListView')
+  delay: 300
 });
 
 class Users extends React.Component {

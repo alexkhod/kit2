@@ -1,36 +1,29 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { PageLayoutN } from '../../common/components/web';
-// import BlockForm from './BlockForm';
-// import BlockNotes from '../containers/BlockNotes';
-// import BlockModules from '../containers/BlockModules';
 import Loading from './Loading';
 
 const AsyncBlockForm = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockForm" */ './BlockForm'),
+  loader: () => import('./BlockForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './BlockForm')
+  delay: 300
 });
 
 const AsyncBlockNotes = Loadable({
-  loader: () => import(/* webpackChunkName: "ZverNoteForm" */ '../containers/BlockNotes'),
+  loader: () => import('../containers/BlockNotes'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../containers/BlockNotes')
+  delay: 300
 });
 
 const AsyncBlockModules = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockModules" */ '../containers/BlockModules'),
+  loader: () => import('../containers/BlockModules'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../containers/BlockModules')
+  delay: 300
 });
 
 const onSubmit = (block, editBlock) => values => {

@@ -1,29 +1,24 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import translate from '../../../i18n';
 import { PageLayoutN } from '../../common/components/web';
-// import ModuleForm from './ModuleForm';
-// import ModuleNotes from '../containers/ModuleNotes';
 import Loading from './Loading';
 // import settings from '../../../../../../settings';
 
 const AsyncModuleForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ModuleForm" */ './ModuleForm'),
+  loader: () => import('./ModuleForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './ModuleForm')
+  delay: 300
 });
 
 const AsyncModuleNotes = Loadable({
-  loader: () => import(/* webpackChunkName: "ModuleNotes" */ '../containers/ModuleNotes'),
+  loader: () => import('../containers/ModuleNotes'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../containers/ModuleNotes')
+  delay: 300
 });
 
 const onSubmit = (module, editModule) => values => {

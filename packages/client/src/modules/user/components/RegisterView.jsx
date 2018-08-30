@@ -1,18 +1,15 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-// import RegisterForm from '../components/RegisterForm';
 import Loading from './Loading';
 import translate from '../../../i18n';
 
 const AsyncRegisterForm = Loadable({
-  loader: () => import(/* webpackChunkName: "RegisterForm" */ '../components/RegisterForm'),
+  loader: () => import('../components/RegisterForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/RegisterForm')
+  delay: 300
 });
 
 class RegisterView extends React.PureComponent {

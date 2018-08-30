@@ -1,18 +1,15 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { graphql, compose } from 'react-apollo';
 
-// import ResetPasswordView from '../components/ResetPasswordView';
 import Loading from '../components/Loading';
 
 import RESET_PASSWORD from '../graphql/ResetPassword.graphql';
 
 const AsyncResetPasswordView = Loadable({
-  loader: () => import(/* webpackChunkName: "ResetPasswordView" */ '../components/ResetPasswordView'),
+  loader: () => import('../components/ResetPasswordView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ResetPasswordView')
+  delay: 300
 });
 
 class ResetPassword extends React.Component {

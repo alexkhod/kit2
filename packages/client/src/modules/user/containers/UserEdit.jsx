@@ -1,10 +1,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { compose, graphql } from 'react-apollo';
 import { pick } from 'lodash';
 
-// import UserEditView from '../components/UserEditView';
 import Loading from '../components/Loading';
 
 import USER_QUERY from '../graphql/UserQuery.graphql';
@@ -13,10 +11,9 @@ import settings from '../../../../../../settings';
 import UserFormatter from '../helpers/UserFormatter';
 
 const AsyncUserEditView = Loadable({
-  loader: () => import(/* webpackChunkName: "UserEditView" */ '../components/UserEditView'),
+  loader: () => import('../components/UserEditView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UserEditView')
+  delay: 300
 });
 
 class UserEdit extends React.Component {

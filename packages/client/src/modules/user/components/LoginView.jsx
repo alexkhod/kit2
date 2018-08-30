@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Linking, Platform } from 'react-native'; //import { StyleSheet, View, Text, Linking, Platform } from 'react-native';
 import { WebBrowser } from 'expo';
@@ -9,17 +8,15 @@ import { placeholderColor } from '../../common/components/native/styles';
 // import settings from '../../../../../../settings';
 import translate from '../../../i18n';
 
-// import LoginForm from './LoginForm';
 import Loading from './Loading';
 
 import { setItem } from '../../common/clientStorage';
 import CURRENT_USER_QUERY from '../graphql/CurrentUserQuery.graphql';
 
 const AsyncLoginForm = Loadable({
-  loader: () => import(/* webpackChunkName: "LoginForm" */ './LoginForm'),
+  loader: () => import('./LoginForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './LoginForm')
+  delay: 300
 });
 
 class LoginView extends React.PureComponent {

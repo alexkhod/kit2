@@ -1,11 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import update from 'immutability-helper';
 
-// import BlockModulesView from '../components/BlockModulesView';
 import Loading from '../components/Loading';
 
 import ADD_MODULE from '../graphql/AddModuleOnBlock.graphql';
@@ -16,10 +14,9 @@ import ADD_MODULE_CLIENT from '../graphql/AddModule.client.graphql';
 import MODULE_QUERY_CLIENT from '../graphql/ModuleQuery.client.graphql';
 
 const AsyncBlockModulesView = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockModulesView" */ '../components/BlockModulesView'),
+  loader: () => import('../components/BlockModulesView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/BlockModulesView')
+  delay: 300
 });
 
 function AddModule(prev, node) {

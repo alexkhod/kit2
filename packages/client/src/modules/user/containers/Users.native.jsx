@@ -1,12 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 
-// import UsersList from '../components/UsersListView';
-// import UsersFilter from '../components/UsersFilterView';
 import Loading from '../components/Loading';
 import withSubscription from './withSubscription';
 import {
@@ -19,17 +16,15 @@ import {
 } from './UserOperations';
 
 const AsyncUsersList = Loadable({
-  loader: () => import(/* webpackChunkName: "UsersList" */ '../components/UsersList'),
+  loader: () => import('../components/UsersList'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UsersList')
+  delay: 300
 });
 
 const AsyncUsersFilter = Loadable({
-  loader: () => import(/* webpackChunkName: "UsersFilter" */ '../components/UsersFilter'),
+  loader: () => import('../components/UsersFilter'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/UsersFilter')
+  delay: 300
 });
 
 class Users extends React.Component {

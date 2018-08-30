@@ -1,21 +1,18 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import translate from '../../../i18n';
 import { Table, Button } from '../../common/components/web';
-// import BlockModuleForm from './BlockModuleForm';
 import Loading from './Loading';
 import { IfLoggedIn } from '../../user/containers/AuthBase';
 
 const AsyncBlockModuleForm = Loadable({
-  loader: () => import(/* webpackChunkName: "BlockModuleForm" */ './BlockModuleForm'),
+  loader: () => import('./BlockModuleForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, './BlockModuleForm')
+  delay: 300
 });
 
 class BlockModulesView extends React.PureComponent {

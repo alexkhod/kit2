@@ -1,21 +1,18 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import translate from '../../../i18n';
-// import ResetPasswordForm from '../components/ResetPasswordForm';
 import Loading from './Loading';
 import { PageLayoutN } from '../../common/components/web';
 
 import settings from '../../../../../../settings';
 
 const AsyncResetPasswordForm = Loadable({
-  loader: () => import(/* webpackChunkName: "ResetPasswordForm" */ '../components/ResetPasswordForm'),
+  loader: () => import('../components/ResetPasswordForm'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/ResetPasswordForm')
+  delay: 300
 });
 
 class ResetPasswordView extends React.Component {

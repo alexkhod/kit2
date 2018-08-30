@@ -1,9 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import path from 'path';
 import { graphql, compose, withApollo } from 'react-apollo';
 
-// import LoginView from '../components/LoginView';
 import Loading from '../components/Loading';
 import access from '../access';
 
@@ -11,10 +9,9 @@ import CURRENT_USER_QUERY from '../graphql/CurrentUserQuery.graphql';
 import LOGIN from '../graphql/Login.graphql';
 
 const AsyncLoginView = Loadable({
-  loader: () => import(/* webpackChunkName: "LoginView" */ '../components/LoginView'),
+  loader: () => import('../components/LoginView'),
   loading: Loading,
-  delay: 300,
-  serverSideRequirePath: path.join(__dirname, '../components/LoginView')
+  delay: 300
 });
 
 class Login extends React.Component {
